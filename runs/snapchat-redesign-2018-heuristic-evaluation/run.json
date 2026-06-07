@@ -1,0 +1,115 @@
+{
+  "run_type": "baseline",
+  "run_id": "snapchat-redesign-2018-heuristic-evaluation",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/snapchat-redesign-2018/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-heuristic-evaluation-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "heuristic-evaluation",
+    "prompt_ref": "runs/snapchat-redesign-2018-heuristic-evaluation/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Private messaging and friend Stories may create an overloaded Friends page mental model, increasing risk that habitual users cannot quickly distinguish conversations from broadcast social content.",
+      "issue_class": "information-architecture-overload",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says the Friends page combined incoming Snaps, chats, and friend Stories, with friend Stories interleaved with private messaging.",
+      "recommendation": "Separate chats, Snaps, and friend Stories into clearly labeled regions, tabs, or filterable lanes; preserve a scannable Stories-only view for users who use Stories as a distinct daily workflow.",
+      "nearest_confuser": "navigation-discoverability",
+      "validation_path": "Run existing-user task tests for finding a chat, viewing a friend's Story, and clearing unread Snaps; compare task time, wrong-path navigation, and self-reported confidence against the prior version.",
+      "stop_or_repair_rule": "Drop or downgrade if users consistently identify each content type without hesitation and completion metrics match the prior interface."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Moving friend Stories out of the familiar chronological Story list may break recognition-based navigation for existing users.",
+      "issue_class": "navigation-discoverability",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says friend content was no longer presented in the previous familiar chronological Story list.",
+      "recommendation": "Provide a visible Stories entry point, migration cue, or persistent label showing where Stories moved; consider retaining the chronological Stories list as an optional view.",
+      "nearest_confuser": "interaction-cost-regression",
+      "validation_path": "Test returning users with no coaching and ask them to find a specific friend's latest Story; measure first-click accuracy and abandonment.",
+      "stop_or_repair_rule": "Revise if the issue is not discoverability but preference dissatisfaction after users can easily locate Stories."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Algorithmic sorting of the Friends page may conflict with user expectations for recency in social communication, reducing visibility of system status and making unread or recent activity feel unpredictable.",
+      "issue_class": "trust-without-provenance",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface says the Friends page was algorithmically sorted rather than simply chronological.",
+      "recommendation": "Expose the ordering logic in lightweight terms, add clear unread/recent indicators, and offer a chronological sort option for users who rely on recency.",
+      "nearest_confuser": "information-architecture-overload",
+      "validation_path": "Ask users to explain why specific friends appear where they do; review support complaints and behavior logs for repeated searching, scrolling, or missed recent messages.",
+      "stop_or_repair_rule": "Drop if users correctly understand the ranking and it measurably improves core engagement without increasing missed-message reports."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The redesigned send flow may regress a core repeated workflow by making friend selection harder for existing users.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says the send flow made finding friends feel harder for existing users.",
+      "recommendation": "Restore fast-recipient affordances such as recent contacts, best friends, search, pinned favorites, multi-select clarity, and stable ordering; validate against the previous send-flow step count.",
+      "nearest_confuser": "navigation-discoverability",
+      "validation_path": "Benchmark sending a Snap to one frequent friend and several friends; compare time, search use, mis-sends, and cancellation rate against the prior version.",
+      "stop_or_repair_rule": "Downgrade if difficulty is limited to first-session relearning and task speed recovers after short repeated use."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Making Story rewatching more effortful risks breaking a common habitual behavior and reducing user control over consumed content.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "moderate",
+      "confidence": "high",
+      "evidence": "The surface says rewatching Stories required more effort than in the prior interface.",
+      "recommendation": "Add a direct rewatch affordance, preserve recently viewed Stories in an accessible list, and avoid requiring users to rediscover the same friend through the mixed Friends page.",
+      "nearest_confuser": "hidden-feature-discoverability",
+      "validation_path": "Run a repeat-view task and compare taps, elapsed time, and failed attempts with the previous interface.",
+      "stop_or_repair_rule": "Drop if rewatching is intentionally deprioritized for product reasons and the added friction is explicitly accepted as a tradeoff."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Removing the ability to revert after update reduces user control and freedom during a high-risk navigation redesign.",
+      "issue_class": "agency-removed",
+      "severity": "moderate",
+      "confidence": "high",
+      "evidence": "The surface says users could not revert to the previous version once updated.",
+      "recommendation": "Provide a temporary rollback option, phased opt-in, preference controls for chronological ordering, or a guided migration path with clear recovery options.",
+      "nearest_confuser": "service-unavailable-blocker",
+      "validation_path": "Monitor churn, app-store reviews, support contacts, and downgrade requests after launch; compare cohorts with and without opt-in or rollback controls.",
+      "stop_or_repair_rule": "Downgrade if the redesign is mandatory for technical or safety reasons and equivalent user-control options exist inside the new interface."
+    },
+    {
+      "id": "finding-007",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The combined, algorithmically sorted Friends page may increase risk of wrong-recipient or missed-recipient errors because familiar friend-finding cues changed.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface says the Friends page was algorithmically sorted and the send flow made finding friends feel harder for existing users.",
+      "recommendation": "Add stronger recipient confirmation, stable favorites, clear search, recent-recipient grouping, and undo/cancel affordances after sending where feasible.",
+      "nearest_confuser": "navigation-discoverability",
+      "validation_path": "Track send cancellations, backtracking, recipient search failures, and mistaken-send reports; run usability tests where users send to similarly named or less-recent friends.",
+      "stop_or_repair_rule": "Drop if logs and tests show no increase in mis-sends, corrections, or recipient-selection hesitation."
+    }
+  ]
+}

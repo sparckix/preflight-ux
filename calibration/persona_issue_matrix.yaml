@@ -1,0 +1,10 @@
+version: 0.1
+status: scaffold
+notes: "No validated calibration scores yet. Populate after benchmark scorer review."
+personas:
+  sara-ux-researcher:
+    issue_classes: {}
+  greg-pe-partner:
+    issue_classes: {}
+  yuki-ai-researcher:
+    issue_classes: {}

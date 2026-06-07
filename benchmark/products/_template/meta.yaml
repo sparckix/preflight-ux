@@ -1,0 +1,8 @@
+slug: template
+product_name: "Template Product"
+launch_date: "YYYY-MM-DD"
+surface_version: "launch"
+benchmark_status: draft
+source_quality: low
+reviewer: "unreviewed"
+notes: "Copy this directory and replace every field for a real benchmark entry."

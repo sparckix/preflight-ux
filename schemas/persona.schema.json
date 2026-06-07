@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://synthetic-ux-panels.local/schemas/persona.schema.json",
+  "title": "Preflight UX Persona Frontmatter",
+  "type": "object",
+  "required": ["id", "type", "name", "populated"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["ux-expert", "user-type"]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "school": {
+      "type": "string"
+    },
+    "archetype": {
+      "type": "string"
+    },
+    "populated": {
+      "type": "boolean"
+    }
+  }
+}

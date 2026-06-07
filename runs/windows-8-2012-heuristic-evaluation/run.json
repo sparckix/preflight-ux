@@ -1,0 +1,128 @@
+{
+  "run_type": "baseline",
+  "run_id": "windows-8-2012-heuristic-evaluation",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/windows-8-2012/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-heuristic-evaluation-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "heuristic-evaluation",
+    "prompt_ref": "runs/windows-8-2012-heuristic-evaluation/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Core OS commands may be too hard to discover because Search, Share, and Settings live in hidden Charms rather than visible controls.",
+      "issue_class": "hidden-feature-discoverability",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface specifies hidden Charms for generic commands such as Search, Share, and Settings.",
+      "recommendation": "Expose persistent or contextually visible entry points for Search, Settings, and app commands, especially during first use and in desktop workflows.",
+      "nearest_confuser": "navigation-discoverability, because the risk is also about familiar destinations moving; hidden-feature-discoverability is closer because the commands are explicitly hidden off-screen.",
+      "validation_path": "Run first-use task tests asking users to find settings, search within an app, and share content without coaching; measure time, failed attempts, and help-seeking.",
+      "stop_or_repair_rule": "Drop if telemetry and usability tests show most novice and experienced users discover Charms quickly without instruction; revise if only one command, not the whole Charms pattern, causes failure."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The dual Start screen and desktop model may create a split mental model where users cannot predict which environment they are in or where a task should be completed.",
+      "issue_class": "information-architecture-overload",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface combines a tile-based Start screen optimized for touch with a traditional desktop environment for legacy PC work.",
+      "recommendation": "Clarify mode boundaries with visible orientation cues, consistent navigation back to Start and desktop, and explicit transitions when launching desktop versus Store apps.",
+      "nearest_confuser": "register-fighting, because two interaction languages compete visually; information-architecture-overload is stronger because the core risk is maintaining a coherent OS mental model.",
+      "validation_path": "Observe users switching between launching apps, finding files, changing settings, and returning to prior work; track wrong-environment errors and repeated backtracking.",
+      "stop_or_repair_rule": "Downgrade if users reliably describe the two environments and choose the right one after a short first-use period."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The launch surface likely violates experienced Windows users' expectations by reducing visible multi-window affordances and shifting common work into full-screen or touch-first patterns.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface notes reduced visible multi-window affordances compared with prior desktop Windows and personas include experienced PC users with existing Windows habits.",
+      "recommendation": "Preserve visible windowing, task switching, and side-by-side affordances for desktop users; provide migration cues where prior Windows workflows changed.",
+      "nearest_confuser": "operator-density-undershoot, because reduced multi-window support also hurts expert throughput; interaction-cost-regression is closer because the risk is regression from established Windows habits.",
+      "validation_path": "Benchmark common legacy workflows against prior Windows versions: open multiple documents, compare windows, switch apps, and recover minimized or obscured work.",
+      "stop_or_repair_rule": "Drop if objective task times and error rates do not regress for experienced users on common multi-window tasks."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Full-screen, low-density Windows Store apps may underserve users doing frequent PC work who need scanability, comparison, and parallel context.",
+      "issue_class": "operator-density-undershoot",
+      "severity": "moderate",
+      "confidence": "high",
+      "evidence": "The surface describes Windows Store apps that emphasized full-screen, low-density layouts and reduced visible multi-window affordances.",
+      "recommendation": "Offer denser layouts, split views, keyboard-first paths, and clear support for side-by-side work in apps used for productivity or repeated tasks.",
+      "nearest_confuser": "interaction-cost-regression, because prior desktop workflows may become slower; operator-density-undershoot is closer for the low-density full-screen app pattern itself.",
+      "validation_path": "Test productivity tasks requiring comparison, copying between apps, and repeated navigation; compare completion time and context loss against desktop equivalents.",
+      "stop_or_repair_rule": "Downgrade for consumption-only apps where full-screen low-density layouts improve focus without blocking common tasks."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Hidden generic commands and reduced visible affordances weaken visibility of system status and available actions, making users rely on memory instead of recognition.",
+      "issue_class": "navigation-discoverability",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface includes hidden Charms and reduced visible multi-window affordances compared with prior desktop Windows.",
+      "recommendation": "Add visible affordances for currently available commands, app state, open windows, and navigation exits; use progressive hints only as a supplement.",
+      "nearest_confuser": "hidden-feature-discoverability, because Charms are hidden; navigation-discoverability better covers the broader loss of visible wayfinding and status cues.",
+      "validation_path": "Ask users what actions are available on each surface and where they are in the system; compare perceived affordances with actual available commands.",
+      "stop_or_repair_rule": "Revise if failures cluster only around Charms rather than broader navigation and status recognition."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "User control and recovery may be weakened when users enter full-screen Store apps or the Start screen without obvious exits, window controls, or escape paths.",
+      "issue_class": "agency-removed",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface describes full-screen Windows Store apps and reduced visible multi-window affordances compared with prior desktop Windows.",
+      "recommendation": "Provide consistently visible or easily discoverable exit, switch, close, and return controls across Start, Store apps, and desktop contexts.",
+      "nearest_confuser": "navigation-discoverability, because exit paths may be hard to find; agency-removed is suggested because the user may feel trapped or unable to undo navigation.",
+      "validation_path": "Run recovery tasks: accidentally open a Store app, return to prior desktop work, close the app, and find the previous window without instruction.",
+      "stop_or_repair_rule": "Drop if users can consistently recover from accidental launches and mode switches using visible controls or familiar keyboard paths."
+    },
+    {
+      "id": "finding-007",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The touch-optimized Start screen may mismatch expectations for mouse-and-keyboard PC users, especially experienced users carrying prior Windows habits into launch.",
+      "issue_class": "navigation-discoverability",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface says the Start screen is tile-based and optimized for touch, while personas include experienced PC users with existing Windows habits.",
+      "recommendation": "Adapt affordances by input context: visible mouse targets, keyboard navigation, desktop-oriented defaults, and first-run guidance for changed Start behavior.",
+      "nearest_confuser": "interaction-cost-regression, because existing workflows may take more effort; navigation-discoverability is closer because the expectation mismatch centers on finding and using navigation.",
+      "validation_path": "Segment tests by touch users and mouse-keyboard users; compare app launch, search, settings, and task-switching success rates.",
+      "stop_or_repair_rule": "Downgrade if mouse-keyboard users perform as well as touch users after minimal exposure."
+    },
+    {
+      "id": "finding-008",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Accessibility risk is likely around hidden commands and mode changes: keyboard and assistive-technology users may not receive enough visible or structural cues to discover commands or recover context.",
+      "issue_class": "accessibility-focus-management",
+      "severity": "moderate",
+      "confidence": "low",
+      "evidence": "The supplied surface includes hidden Charms, full-screen Store apps, and reduced visible multi-window affordances, but does not specify keyboard focus behavior or assistive technology semantics.",
+      "recommendation": "Audit keyboard traversal, focus order, screen-reader announcements, and command discoverability across Start, Charms, Store apps, and desktop transitions.",
+      "nearest_confuser": "hidden-feature-discoverability, because the strongest evidence is hidden commands; accessibility-focus-management is a tentative issue-class suggestion pending implementation evidence.",
+      "validation_path": "Test with keyboard-only and screen-reader users completing search, settings, app switching, closing, and returning-to-desktop tasks.",
+      "stop_or_repair_rule": "Drop or reclassify if implementation provides reliable keyboard shortcuts, focus restoration, and screen-reader announcements despite the hidden visual model."
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preflight UX</title>
+    <meta name="description" content="Run structured pre-ship UX risk panels before users hit product friction." />
+    <link rel="stylesheet" href="/web/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark">PX</span>
+        <div>
+          <strong>Preflight UX</strong>
+          <span>Review brief builder</span>
+        </div>
+      </div>
+      <nav class="topnav" aria-label="Primary">
+        <a href="#how-to">How to use</a>
+        <a href="#brief">Brief</a>
+        <a href="#panel">Panel</a>
+        <a href="#output">Output</a>
+        <a href="/example">Example</a>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Pre-ship UX risk detection</p>
+          <h1 id="page-title">Build a review brief before launch.</h1>
+        </div>
+        <div class="status-strip" aria-label="Workflow status">
+          <span>Brief</span>
+          <span>Surface</span>
+          <span>Panel</span>
+          <span>Review</span>
+        </div>
+      </section>
+
+      <section class="how-to" id="how-to" aria-labelledby="how-to-title">
+        <div>
+          <h2 id="how-to-title">How to use</h2>
+          <p>Bring the product surface you want reviewed, choose the panel, then run it with your own model key. Findings are hypotheses to validate, not user-research proof.</p>
+        </div>
+        <ol class="steps">
+          <li><strong>Describe the job.</strong><span>Name the product, audience, stage, and what a user is trying to do.</span></li>
+          <li><strong>Add the surface.</strong><span>Paste the spec or copy, add a prototype URL, and upload screenshots for visual review.</span></li>
+          <li><strong>Select risks.</strong><span>Pick personas, issue classes, and review depth for the decision you are stress-testing.</span></li>
+          <li><strong>Run or export.</strong><span>Run with BYOK, download a review brief JSON, or export a repo-ready Markdown report.</span></li>
+        </ol>
+      </section>
+
+      <section class="workspace" id="brief">
+        <form class="tool-panel" id="briefForm">
+          <div class="panel-head">
+            <h2>Product Brief</h2>
+            <button class="ghost" type="button" id="loadSample">Load sample</button>
+          </div>
+
+          <label>
+            Product name
+            <input id="productName" name="productName" type="text" value="Untitled product" />
+          </label>
+
+          <label>
+            Audience
+            <input id="audience" name="audience" type="text" placeholder="Founders, operators, students, reviewers..." />
+          </label>
+
+          <div class="field-row">
+            <label>
+              Stage
+              <select id="stage" name="stage">
+                <option>pre-ship</option>
+                <option>prototype</option>
+                <option>redesign</option>
+                <option>post-launch</option>
+              </select>
+            </label>
+            <label>
+              Surface type
+              <select id="surfaceType" name="surfaceType">
+                <option>spec</option>
+                <option>url</option>
+                <option>screenshot</option>
+                <option>prototype</option>
+                <option>pr</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Prototype or live URL
+            <input id="prototypeUrl" name="prototypeUrl" type="url" placeholder="https://figma.com/proto/... or https://your-product.com/flow" />
+          </label>
+
+          <label>
+            Product surface notes
+            <textarea id="surface" name="surface" rows="12" placeholder="Paste screen copy, flow notes, PR details, launch context, or what the prototype is supposed to accomplish."></textarea>
+          </label>
+
+          <div class="upload-box">
+            <div>
+              <h3>Screenshots</h3>
+              <p>Upload PNG, JPG, or WebP screenshots. They stay in this browser until you run BYOK or export the brief.</p>
+            </div>
+            <label class="file-button">
+              <input id="screenshotInput" type="file" accept="image/png,image/jpeg,image/webp" multiple />
+              <span>Add screenshots</span>
+            </label>
+            <div class="attachment-status" id="attachmentStatus" role="status" aria-live="polite">No screenshots added.</div>
+            <div class="screenshot-preview" id="screenshotPreview"></div>
+            <button class="ghost" type="button" id="clearScreenshots" disabled>Clear screenshots</button>
+          </div>
+
+          <fieldset>
+            <legend>Risk focus</legend>
+            <div class="check-grid" id="riskFocus"></div>
+          </fieldset>
+        </form>
+
+        <aside class="tool-panel" id="panel">
+          <div class="panel-head">
+            <h2>Panel</h2>
+            <button class="ghost" type="button" id="selectDefault">Default</button>
+          </div>
+
+          <div class="quality-controls" aria-label="Review quality controls">
+            <label>
+              Review depth
+              <select id="reviewDepth">
+                <option value="fast">Fast pass</option>
+                <option value="deep">Deep pass</option>
+              </select>
+            </label>
+            <label>
+              Synthesis mode
+              <select id="synthesisMode">
+                <option value="prioritized">Prioritized risks</option>
+                <option value="disagreement">Persona disagreement</option>
+                <option value="adversarial">Adversarial stress test</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="persona-list" id="personaList"></div>
+
+          <div class="byok-box" id="byok">
+            <div class="panel-head compact">
+              <h2>Model</h2>
+              <span class="byok-status" id="byokStatus">BYOK off</span>
+            </div>
+            <label class="toggle-row">
+              <input id="byokEnabled" type="checkbox" />
+              <span>Use my own API key</span>
+            </label>
+            <div class="byok-fields" id="byokFields">
+              <label>
+                Provider
+                <select id="byokProvider">
+                  <option value="anthropic">Anthropic (Claude)</option>
+                  <option value="openai">OpenAI (GPT)</option>
+                  <option value="google">Google (Gemini)</option>
+                </select>
+              </label>
+              <label>
+                Model
+                <select id="byokModel"></select>
+              </label>
+              <label>
+                API key
+                <div class="key-row">
+                  <input id="byokKey" type="password" autocomplete="off" spellcheck="false" placeholder="Stored only in this browser" />
+                  <button class="ghost" type="button" id="toggleKey">Show</button>
+                </div>
+              </label>
+              <button class="danger" type="button" id="clearKey">Remove key from this device</button>
+              <p class="fine-print">Request path: browser to <code>/api/panel</code> to the selected provider over HTTPS. Your key is stored in localStorage and is not stored by this app.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="output-area" id="output" aria-busy="false">
+        <div class="output-actions">
+          <div>
+            <h2>Review Brief</h2>
+            <p>Build the JSON brief for CLI use, or run the selected panel with your own model key.</p>
+          </div>
+          <div class="button-row">
+            <label class="secondary-file-button">
+              <input id="importInput" type="file" accept="application/json,.json" />
+              <span>Import</span>
+            </label>
+            <button type="button" id="validateBrief" class="secondary">Check</button>
+            <button type="button" id="generatePacket" class="secondary">Build</button>
+            <button type="button" id="runPanel" class="primary-action">Run panel</button>
+            <button type="button" id="copyPacket" class="secondary">Copy</button>
+            <button type="button" id="downloadPacket" class="secondary">Brief JSON</button>
+            <button type="button" id="downloadResult" class="secondary" disabled>Raw MD</button>
+            <button type="button" id="downloadReport" class="secondary" disabled>Report MD</button>
+          </div>
+        </div>
+        <div class="validation-box" id="validationBox" role="status" aria-live="polite"></div>
+        <pre class="output-box" id="packetOutput" tabindex="0"></pre>
+        <div class="provenance-box" id="provenanceBox"></div>
+        <div class="panel-result" id="panelResult" role="status" aria-live="polite" aria-atomic="true"></div>
+        <details class="findings-box" open>
+          <summary>Normalized findings</summary>
+          <div class="findings-actions">
+            <button class="secondary" type="button" id="parseFindings">Parse</button>
+            <button class="secondary" type="button" id="addFinding">Add</button>
+            <button class="secondary" type="button" id="downloadRunJson" disabled>run.json</button>
+          </div>
+          <div id="findingsList" class="findings-list"></div>
+        </details>
+        <details class="history-box" open>
+          <summary>Local history</summary>
+          <div id="historyList" class="history-list"></div>
+          <button class="ghost" type="button" id="clearHistory">Clear local history</button>
+        </details>
+      </section>
+    </main>
+
+    <script src="/web/app.js"></script>
+  </body>
+</html>

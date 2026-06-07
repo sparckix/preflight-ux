@@ -1,0 +1,365 @@
+# Canonical issue-class taxonomy for Synthetic UX Panels.
+# Keep slugs stable. Add aliases when wording changes.
+
+version: 0.1
+
+classes:
+  - slug: empty-state-confusion
+    category: onboarding
+    definition: "The first usable state does not teach what to do or what value the product returns."
+    counts:
+      - "Blank input with no example"
+      - "Empty dashboard with no next action"
+      - "Explainer copy that still requires the user to imagine the output"
+    does_not_count:
+      - "A sparse surface that still includes a concrete example or sample output"
+    severity_guidance: "Severe when first-time users must commit private or effortful input before seeing value."
+    aliases:
+      - no-empty-state-example
+      - dead-empty-state
+      - empty-state-conversion-gate
+
+  - slug: loading-abandonment
+    category: feedback
+    definition: "The user waits for a core action without progress, timing, or reassurance."
+    counts:
+      - "Long-running submit action with no progress state"
+      - "Indeterminate waiting during first-use value delivery"
+    does_not_count:
+      - "Fast actions under one second"
+      - "Background work that does not block the user's task"
+    severity_guidance: "Severe when the first successful result often takes more than four seconds."
+    aliases:
+      - loading-state-abandonment
+
+  - slug: copy-anchoring-on-verdict
+    category: framing
+    definition: "Copy frames the product output as a verdict on the user rather than a property of the artifact."
+    counts:
+      - "Language that tells the user they are wrong before explaining why"
+      - "Headlines that anchor interpretation around failure or judgment"
+    does_not_count:
+      - "Direct critique that is clearly scoped to the submitted artifact"
+    severity_guidance: "Moderate to severe when ego load or defensiveness blocks learning."
+    aliases:
+      - anchoring-on-verdict
+      - loss-aversion-on-critique
+
+  - slug: screenshot-export-friction
+    category: sharing
+    definition: "The product creates useful output but makes saving, exporting, or sharing it awkward."
+    counts:
+      - "No copy/export affordance for generated results"
+      - "Result format requires manual cropping or cleanup"
+    does_not_count:
+      - "No export on a product where output is purely transient and not reused"
+    severity_guidance: "Moderate when sharing is part of the natural workflow; severe when export is the product's main downstream value."
+    aliases:
+      - screenshot-ugly
+      - no-export-no-save
+      - no-export-friction
+
+  - slug: domain-mismatch-trust-break
+    category: trust
+    definition: "The product uses examples, evidence, or language from a mismatched domain, causing the user to distrust otherwise relevant output."
+    counts:
+      - "Irrelevant examples presented as proof"
+      - "Confident domain-specific output outside the product's evidence base"
+    does_not_count:
+      - "Explicitly labeled analogies or low-confidence examples"
+    severity_guidance: "Severe for expert or high-stakes users evaluating credibility."
+    aliases:
+      - domain-mismatch
+      - domain-mismatch-exhibit
+
+  - slug: accessibility-contrast
+    category: accessibility
+    definition: "Text or controls do not meet expected contrast requirements for the context."
+    counts:
+      - "Small text below WCAG AA contrast"
+      - "Disabled or secondary controls that become unreadable"
+    does_not_count:
+      - "Purely decorative elements with no informational purpose"
+    severity_guidance: "Severe when core instructions, errors, or controls are affected."
+    aliases:
+      - contrast-fails-aa
+      - disabled-state-low-contrast
+
+  - slug: accessibility-aria-live-missing
+    category: accessibility
+    definition: "Dynamic results, errors, or status changes are not announced to assistive technology."
+    counts:
+      - "Generated result appears after submit without an appropriate live region"
+      - "Error state changes silently"
+    does_not_count:
+      - "Static page content loaded before interaction"
+    severity_guidance: "Severe when dynamic output is the core product value."
+    aliases:
+      - aria-live-missing
+
+  - slug: accessibility-focus-management
+    category: accessibility
+    definition: "Keyboard or assistive-technology focus is lost, stranded, or moved unpredictably after interaction."
+    counts:
+      - "Focus remains on disabled control after submit"
+      - "Result appears but focus does not move or announce a path"
+    does_not_count:
+      - "Focus remains stable during non-blocking background updates"
+    severity_guidance: "Severe when keyboard users cannot complete or understand the core flow."
+    aliases:
+      - focus-management-broken
+
+  - slug: typography-stack-generic
+    category: visual-design
+    definition: "Generic or accidental typography weakens comprehension, credibility, or product character."
+    counts:
+      - "Default system stack used where content quality depends on reading experience"
+      - "Font choice conflicts with the product's intended register"
+    does_not_count:
+      - "Intentional system typography in dense operational tools"
+    severity_guidance: "Minor to moderate unless credibility or readability is central to the product."
+    aliases:
+      - typography-quality
+
+  - slug: register-fighting
+    category: visual-design
+    definition: "Multiple visual or interaction languages compete, making the product's purpose feel unclear."
+    counts:
+      - "Editorial framing around an input-heavy operator workflow"
+      - "Playful marketing chrome around a high-stakes professional task"
+    does_not_count:
+      - "Intentional contrast that clarifies separate modes or regions"
+    severity_guidance: "Minor to moderate; severe when it damages trust or first-use comprehension."
+    aliases: []
+
+  - slug: wordmark-undistinguished
+    category: brand
+    definition: "The product name renders as default text with no recognizable identity or memory hook."
+    counts:
+      - "No distinctive wordmark, lockup, or typographic move"
+    does_not_count:
+      - "Unbranded internal tools where recognition is irrelevant"
+    severity_guidance: "Minor unless shareability, trust, or market recall is a launch goal."
+    aliases:
+      - brand-distinctiveness
+
+  - slug: og-image-default
+    category: sharing
+    definition: "External link previews use generic, missing, or framework-default metadata."
+    counts:
+      - "No Open Graph image"
+      - "Default framework preview image"
+    does_not_count:
+      - "Private products without public link sharing"
+    severity_guidance: "Moderate when launch distribution depends on social or chat sharing."
+    aliases: []
+
+  - slug: keyboard-shortcut-missing
+    category: efficiency
+    definition: "Repeated or primary actions lack expected keyboard acceleration."
+    counts:
+      - "Primary submit action lacks Cmd/Ctrl+Enter in a text-heavy tool"
+      - "Power workflow lacks keyboard path"
+    does_not_count:
+      - "Casual one-off flows where keyboard acceleration is not expected"
+    severity_guidance: "Moderate for operator tools; minor for casual consumer flows."
+    aliases:
+      - keyboard-shortcuts-missing
+
+  - slug: prompt-injection-vulnerable
+    category: ai-safety
+    definition: "The product accepts adversarial or instruction-like user input that can alter intended system behavior."
+    counts:
+      - "User text tells the model to ignore instructions and the product complies"
+      - "Retrieved or pasted content manipulates output policy"
+    does_not_count:
+      - "Harmless user disagreement with model output"
+    severity_guidance: "Severe for AI products that process untrusted user or retrieved text."
+    aliases: []
+
+  - slug: out-of-distribution-handling
+    category: trust
+    definition: "The product responds confidently when the input is outside its domain, evidence base, or competence."
+    counts:
+      - "No low-confidence or out-of-domain signal"
+      - "Gibberish receives a confident answer"
+    does_not_count:
+      - "A clear fallback explaining uncertainty"
+    severity_guidance: "Severe when users may rely on the output for important decisions."
+    aliases:
+      - no-domain-coverage-signal
+      - honest-low-match-missing
+      - no-failure-mode-exposed
+
+  - slug: trust-without-provenance
+    category: trust
+    definition: "The product asks users to trust an output without enough evidence, confidence, or rationale."
+    counts:
+      - "No confidence indicator"
+      - "No source, rationale, or explanation for generated output"
+    does_not_count:
+      - "Simple deterministic UI where provenance is unnecessary"
+    severity_guidance: "Moderate to severe in expert, AI, financial, health, legal, or policy contexts."
+    aliases:
+      - opaque-retrieval
+
+  - slug: agency-removed
+    category: interaction
+    definition: "The user receives critique or output but has no way to respond, correct, refine, or push back."
+    counts:
+      - "Generated result has no feedback or refinement path"
+      - "Product treats output as final despite uncertainty"
+    does_not_count:
+      - "Static informational pages"
+    severity_guidance: "Moderate when the product is advisory; severe when error costs are high."
+    aliases: []
+
+  - slug: navigation-discoverability
+    category: navigation
+    definition: "Users cannot easily find where a familiar or necessary action moved in the interface."
+    counts:
+      - "Important destinations are hidden behind unfamiliar gestures or locations"
+      - "A redesign moves high-frequency actions without clear wayfinding"
+    does_not_count:
+      - "A new feature that is discoverable through clear navigation"
+    severity_guidance: "Moderate to severe when it affects high-frequency existing workflows."
+    aliases:
+      - reduced-discoverability
+      - hidden-navigation
+
+  - slug: information-architecture-overload
+    category: navigation
+    definition: "The product groups or interleaves content in a way that makes users unable to maintain a clear mental model."
+    counts:
+      - "Private, social, and media content are mixed without clear hierarchy"
+      - "Multiple communication modes appear in one feed without filtering or orientation"
+    does_not_count:
+      - "Dense information that remains clearly grouped and labeled"
+    severity_guidance: "Severe when it disrupts the core daily workflow."
+    aliases:
+      - cognitive-overhead
+      - cluttered-feed
+
+  - slug: interaction-cost-regression
+    category: interaction
+    definition: "A redesign makes an existing common task take more steps, more memory, or more effort."
+    counts:
+      - "Rewatching or sending content becomes harder after a redesign"
+      - "A common flow requires extra navigation compared with the prior version"
+    does_not_count:
+      - "Added friction for safety, privacy, or compliance reasons"
+    severity_guidance: "Moderate for secondary tasks; severe for core habitual tasks."
+    aliases:
+      - workflow-regression
+
+  - slug: hidden-feature-discoverability
+    category: navigation
+    definition: "Important generic commands or settings are hidden until users know a gesture, corner, or mode."
+    counts:
+      - "Search, settings, share, or app commands are hidden off-screen"
+      - "Users must know an invisible gesture to access core controls"
+    does_not_count:
+      - "Advanced shortcuts that duplicate visible controls"
+    severity_guidance: "Moderate for optional commands; severe when hidden controls block core tasks."
+    aliases:
+      - hidden-features
+
+  - slug: operator-density-undershoot
+    category: efficiency
+    definition: "A tool for frequent or expert use is too sparse, modal, or low-density for efficient real work."
+    counts:
+      - "Power users lose multi-window or side-by-side workflows"
+      - "The interface hides too much information for repeated operational use"
+    does_not_count:
+      - "Low-density onboarding screens for true first-time users"
+    severity_guidance: "Moderate to severe for professional tools and operating environments."
+    aliases:
+      - low-information-density
+      - reduced-power
+
+  - slug: account-before-value
+    category: onboarding
+    definition: "The product requires account creation, identity proofing, or high-friction registration before users can inspect value."
+    counts:
+      - "Users must register before browsing available options"
+      - "Users must provide sensitive information before seeing whether the product is relevant"
+    does_not_count:
+      - "Account creation required by law or security after value is explained"
+    severity_guidance: "Severe when account creation blocks first-use evaluation or overloads a launch flow."
+    aliases:
+      - registration-before-browsing
+      - commitment-required-too-early
+
+  - slug: service-unavailable-blocker
+    category: reliability
+    definition: "The core digital service is unavailable, times out, or produces blocking errors during the user's primary task."
+    counts:
+      - "Users cannot create accounts, submit forms, or complete checkout because the service fails"
+      - "Blank screens, system outages, or repeated error messages block completion"
+    does_not_count:
+      - "Minor latency with clear recovery and successful completion"
+    severity_guidance: "Severe when it blocks the primary transaction."
+    aliases:
+      - system-unavailable
+      - submission-errors
+
+  - slug: identity-verification-friction
+    category: onboarding
+    definition: "Identity verification fails or becomes so difficult that users cannot access the intended service."
+    counts:
+      - "Users fail to prove identity despite being eligible"
+      - "Verification flow prevents access to downstream public or account services"
+    does_not_count:
+      - "Necessary verification that completes reliably and explains alternatives"
+    severity_guidance: "Severe for public services, benefits, finance, healthcare, or other high-stakes access."
+    aliases:
+      - verification-failure
+
+  - slug: support-channel-failure
+    category: support
+    definition: "Users hit a blocking issue and cannot get timely help through the support channel provided."
+    counts:
+      - "Most calls go unanswered during a broken launch"
+      - "Support guidance is unavailable or does not address known blockers"
+    does_not_count:
+      - "Low-priority support delays for non-blocking issues"
+    severity_guidance: "Severe when the blocked flow affects deadlines, eligibility, money, health, or legal access."
+    aliases:
+      - call-center-failure
+
+  - slug: vulnerable-user-access-barrier
+    category: inclusion
+    definition: "A public or essential service disproportionately blocks users with higher support needs or fewer fallback options."
+    counts:
+      - "Benefits, healthcare, education, or identity flows fail for vulnerable groups"
+      - "The product requires fallback support that the affected users cannot reliably access"
+    does_not_count:
+      - "General usability friction with no evidence of disproportionate access impact"
+    severity_guidance: "Severe when it blocks access to public benefits, money, housing, education, health, or legal services."
+    aliases:
+      - vulnerable-users-affected
+
+  - slug: data-quality-trust-break
+    category: trust
+    definition: "Incorrect, missing, or stale product data causes users to distrust the product's core output."
+    counts:
+      - "Maps, locations, prices, eligibility, or availability data are visibly wrong"
+      - "A product replaces a trusted data source with an unreliable one"
+    does_not_count:
+      - "Clearly labeled estimates or incomplete beta data"
+    severity_guidance: "Severe when users may make real-world navigation, financial, health, or safety decisions."
+    aliases:
+      - inaccurate-data
+      - missing-data
+
+  - slug: form-submission-blocker
+    category: forms
+    definition: "Users cannot submit a required form because of validation, dependency, availability, or system errors."
+    counts:
+      - "Submission errors prevent completion"
+      - "Required contributor or dependent flows cannot be completed"
+    does_not_count:
+      - "Clear validation errors that users can fix"
+    severity_guidance: "Severe when the form gates money, benefits, healthcare, legal status, or education access."
+    aliases:
+      - form-submission-errors

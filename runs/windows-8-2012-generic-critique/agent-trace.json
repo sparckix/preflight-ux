@@ -1,0 +1,21 @@
+{
+  "command_preview": [
+    "codex",
+    "exec",
+    "--skip-git-repo-check",
+    "--cd",
+    "/Users/daalami/preflight-ux",
+    "--sandbox",
+    "read-only",
+    "<prompt>"
+  ],
+  "finding_count": 6,
+  "model": "default",
+  "raw_output_archived": true,
+  "raw_output_storage": "internal/archive/raw-model-outputs",
+  "run_id": "windows-8-2012-generic-critique",
+  "runtime": "codex",
+  "schema": "preflight-baseline-agent-trace-v1",
+  "stderr_present": true,
+  "timestamp": 1780786868
+}

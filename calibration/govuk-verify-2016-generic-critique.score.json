@@ -1,0 +1,32 @@
+{
+  "baseline_kind": "generic-critique",
+  "f1": 0.8571428571428571,
+  "false_positives": [
+    "account-before-value"
+  ],
+  "hits": [
+    "identity-verification-friction",
+    "service-unavailable-blocker",
+    "vulnerable-user-access-barrier"
+  ],
+  "misses": [],
+  "notes": "Preliminary class-level score. Human scorer review is required for issue-level calibration.",
+  "precision": 0.75,
+  "predicted_classes": [
+    "account-before-value",
+    "identity-verification-friction",
+    "service-unavailable-blocker",
+    "vulnerable-user-access-barrier"
+  ],
+  "recall": 1.0,
+  "run_id": "govuk-verify-2016-generic-critique",
+  "run_type": "baseline",
+  "score_type": "class-level-preliminary",
+  "severity_weighted_recall": 1.0,
+  "surface": "benchmark/products/govuk-verify-2016/surface.md",
+  "truth_classes": [
+    "identity-verification-friction",
+    "service-unavailable-blocker",
+    "vulnerable-user-access-barrier"
+  ]
+}

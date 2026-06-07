@@ -1,0 +1,42 @@
+issues:
+  - id: account-before-shopping
+    class: account-before-value
+    description: "Users had to create accounts before browsing plans, forcing commitment and backend load before they could inspect value."
+    severity: severe
+    surfaced_by: "consumers and independent technical observers"
+    sources:
+      - title: "Here's Why Healthcare.gov Broke Down"
+        url: "https://www.propublica.org/article/heres-why-healthcaregov-broke-down"
+        date: "2013-10-16"
+      - title: "Healthcare.gov: CMS Has Taken Steps to Address Problems, but Needs to Further Implement Systems Development Best Practices"
+        url: "https://www.gao.gov/products/gao-15-238"
+        date: "2015-03-04"
+    notes: "This is the cleanest UX/design issue in the case: registration before plan browsing."
+
+  - id: account-creation-blocked
+    class: service-unavailable-blocker
+    description: "Users repeatedly failed to create accounts or log in because of errors, outages, invalid-account states, and system bottlenecks."
+    severity: severe
+    surfaced_by: "consumers attempting enrollment"
+    sources:
+      - title: "Here's Why Healthcare.gov Broke Down"
+        url: "https://www.propublica.org/article/heres-why-healthcaregov-broke-down"
+        date: "2013-10-16"
+      - title: "Healthcare.gov: CMS Has Taken Steps to Address Problems, but Needs to Further Implement Systems Development Best Practices"
+        url: "https://www.gao.gov/products/gao-15-238"
+        date: "2015-03-04"
+    notes: "Technical reliability issue, but it appears to users as a blocking UX failure."
+
+  - id: waiting-and-retry-frustration
+    class: loading-abandonment
+    description: "Long waits and repeated retries created abandonment risk during first-use account creation and enrollment."
+    severity: severe
+    surfaced_by: "consumers and press reports"
+    sources:
+      - title: "Here's Why Healthcare.gov Broke Down"
+        url: "https://www.propublica.org/article/heres-why-healthcaregov-broke-down"
+        date: "2013-10-16"
+      - title: "Healthcare.gov: CMS Has Taken Steps to Address Problems"
+        url: "https://www.gao.gov/products/gao-15-238"
+        date: "2015-03-04"
+    notes: "Score only if a persona predicts launch-scale waiting/retry abandonment from the flow or known load assumptions."

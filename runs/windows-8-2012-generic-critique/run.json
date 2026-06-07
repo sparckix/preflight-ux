@@ -1,0 +1,102 @@
+{
+  "run_type": "baseline",
+  "run_id": "windows-8-2012-generic-critique",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/windows-8-2012/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-generic-critique-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "generic-critique",
+    "prompt_ref": "runs/windows-8-2012-generic-critique/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Important system commands may be too hard to discover because Search, Share, and Settings are hidden behind Charms rather than visible in the primary UI.",
+      "issue_class": "hidden-feature-discoverability",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface specifies hidden Charms for generic commands such as Search, Share, and Settings.",
+      "recommendation": "Add visible entry points or first-run cueing for Search, Settings, and app commands, especially from both Start and desktop contexts.",
+      "nearest_confuser": "navigation-discoverability, because the risk also involves familiar actions moving to less obvious locations.",
+      "validation_path": "Run novice and experienced PC-user tasks that require changing settings, searching for an app/file, and invoking app commands without prompting for Charms.",
+      "stop_or_repair_rule": "Drop or downgrade if visible redundant controls exist on the actual launch surface or if onboarding reliably teaches Charms before the first blocked task."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-generic-critique",
+      "raw_finding": "The two-environment model may create a mental-model split where users must understand when they are in Start, desktop, or a Store app before knowing which controls apply.",
+      "issue_class": "information-architecture-overload",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "The launch surface combines a tile-based Start screen, a traditional desktop environment, hidden Charms, and full-screen Windows Store apps.",
+      "recommendation": "Make mode boundaries explicit with consistent navigation back to Start/desktop, shared command placement, and clear visual labeling of where the user is.",
+      "nearest_confuser": "register-fighting, because the risk may be more about competing interaction languages than content hierarchy.",
+      "validation_path": "Test cross-environment flows such as launching a desktop app, switching to a Store app, finding a setting, and returning to a previous task.",
+      "stop_or_repair_rule": "Revise if users can complete cross-environment tasks but describe the model inaccurately; that would indicate learnability risk rather than task-blocking IA overload."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Existing PC workflows may feel regressed if familiar multi-window and desktop affordances are less visible or unavailable in Store app contexts.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface notes reduced visible multi-window affordances compared with prior desktop Windows and personas with existing Windows habits.",
+      "recommendation": "Preserve visible task switching, snapping, and window-management cues, or provide clear transition affordances for moving between full-screen apps and desktop workflows.",
+      "nearest_confuser": "operator-density-undershoot, because the same evidence also suggests reduced efficiency for expert work.",
+      "validation_path": "Compare step count and hesitation points for common prior-Windows workflows: copy between apps, view two documents side by side, switch among several open windows.",
+      "stop_or_repair_rule": "Downgrade if the surface includes equally discoverable replacement affordances for side-by-side and multi-app work."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Full-screen, low-density Store apps may underserve frequent or expert PC work that depends on scanning, comparison, and parallel context.",
+      "issue_class": "operator-density-undershoot",
+      "severity": "moderate",
+      "confidence": "high",
+      "evidence": "Windows Store apps are described as full-screen with low-density layouts, while the OS must also support experienced PC users and legacy PC work.",
+      "recommendation": "Offer density controls, stronger snap/side-by-side patterns, and task surfaces optimized for keyboard/mouse and information-heavy workflows.",
+      "nearest_confuser": "interaction-cost-regression, if the main harm is extra steps versus simply too little information per screen.",
+      "validation_path": "Run expert workflows requiring comparison, reference material, or repeated switching, and compare completion friction against a traditional desktop baseline.",
+      "stop_or_repair_rule": "Drop for apps whose primary jobs are media consumption or simple single-task flows; retain for productivity, admin, file, browser, and communication surfaces."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-generic-critique",
+      "raw_finding": "The touch-optimized Start screen may make familiar desktop-era destinations harder to locate for users bringing existing Windows habits.",
+      "issue_class": "navigation-discoverability",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface states the Start screen is tile-based and optimized for touch, while personas include experienced PC users with existing Windows habits.",
+      "recommendation": "Add clear wayfinding for all apps, desktop, shutdown/sign-out, search, settings, and recently used items; preserve keyboard/mouse paths alongside touch gestures.",
+      "nearest_confuser": "hidden-feature-discoverability, if the specific blocker is an invisible gesture rather than the changed Start information architecture.",
+      "validation_path": "Ask prior-Windows users to find installed apps, system settings, power controls, and the desktop without instruction.",
+      "stop_or_repair_rule": "Downgrade if the actual Start surface has prominent labels, search focus, and visible all-apps/system controls."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-generic-critique",
+      "raw_finding": "The product may feel internally inconsistent because it mixes touch-first tiles, full-screen Store apps, hidden edge commands, and a legacy desktop interaction model.",
+      "issue_class": "register-fighting",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface combines a tile-based touch Start screen, a traditional desktop, hidden Charms, Store apps, and reduced desktop-style window affordances.",
+      "recommendation": "Unify command placement, visual hierarchy, and navigation patterns across Start, Store apps, and desktop; where modes must differ, label and transition them deliberately.",
+      "nearest_confuser": "information-architecture-overload, if users cannot maintain a clear model rather than merely perceiving inconsistent interaction languages.",
+      "validation_path": "Observe whether users can predict where commands, navigation, and app switching live after seeing them once in one environment.",
+      "stop_or_repair_rule": "Revise if inconsistency is intentional and well-signposted by mode-specific affordances that users can explain and reuse."
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "run_type": "baseline",
+  "run_id": "govuk-verify-2016-generic-critique",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/govuk-verify-2016/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-generic-critique-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "generic-critique",
+    "prompt_ref": "runs/govuk-verify-2016-generic-critique/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-generic-critique",
+      "raw_finding": "The identity proofing step may become the launch-critical access blocker rather than a supporting security check.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says users had to select a provider, supply identity information, and complete verification before returning to the government service; users could fail during provider selection or identity proofing; completion and service-access rates were below expectations.",
+      "recommendation": "Treat verification as a monitored access pathway with step-level failure handling: expose requirements before provider selection, provide save/resume, explain failed checks in recoverable language, and offer a non-digital or assisted alternative when verification cannot be completed.",
+      "nearest_confuser": "account-before-value, because identity proofing also occurs before the user reaches the downstream public service.",
+      "validation_path": "Instrument funnel completion by provider-selection, identity-data submission, proofing decision, return-to-service, and final service access; run moderated tests with users who have varied document and credit-history profiles.",
+      "stop_or_repair_rule": "Drop or revise if step-level data shows verification completes reliably and failures have clear, used recovery paths that still allow timely service access."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Requiring identity proofing before service access may create a high-friction commitment gate before users can complete the public-service task they came for.",
+      "issue_class": "account-before-value",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "Verify mediated access to downstream public services, and the flow required users to select a provider, supply identity information, and complete verification before returning to the government service.",
+      "recommendation": "Before sending users into Verify, show why verification is required, what documents or records are needed, expected time, available providers, and what fallback route exists if they cannot complete it.",
+      "nearest_confuser": "identity-verification-friction, because the barrier is specifically identity proofing rather than ordinary registration.",
+      "validation_path": "Compare abandonment before provider selection, during provider selection, and during proofing; test whether users can predict what they need and whether they can choose a viable route before entering sensitive information.",
+      "stop_or_repair_rule": "Downgrade if legal or security constraints require this gate and the surface clearly explains value, requirements, alternatives, and recovery before sensitive data entry."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-generic-critique",
+      "raw_finding": "The provider-selection step may introduce avoidable decision risk before users understand which certified company can verify them.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "The surface says users could fail during provider selection, and provider selection was required before identity proofing and return to the government service.",
+      "recommendation": "Replace undifferentiated provider choice with eligibility matching or guided routing: ask only the minimum questions needed to recommend viable providers, show clear comparison criteria, and allow switching without restarting.",
+      "nearest_confuser": "information-architecture-overload, if the provider list itself is the confusing element rather than the verification requirement.",
+      "validation_path": "Measure selection drop-off, provider-switching, repeated starts, and mismatch between chosen provider and successful verification; usability-test provider choice with users unfamiliar with certified identity companies.",
+      "stop_or_repair_rule": "Revise if evidence shows users select providers successfully but fail later due to document, data, or provider-side proofing constraints."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-generic-critique",
+      "raw_finding": "The flow may create disproportionate access risk for users with higher support needs or fewer fallback options.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The supplied surface says vulnerable or benefits-related users were among those affected, and the benchmark is a high-stakes identity and public-service access case.",
+      "recommendation": "Design explicit assisted-digital and alternative verification routes, publish eligibility and fallback guidance before the gate, and monitor completion by service type and user-support segment where lawful and appropriate.",
+      "nearest_confuser": "support-channel-failure, but the supplied surface does not describe support-channel availability or failure.",
+      "validation_path": "Validate with accessibility, assisted-digital, and benefits-related user scenarios; track whether fallback routes preserve access within service deadlines.",
+      "stop_or_repair_rule": "Drop only if the affected services are low-stakes or if robust fallback access is proven to work for vulnerable and benefits-related users."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Because Verify mediates access to multiple downstream services, failures in the shared identity layer may block otherwise functional public-service journeys.",
+      "issue_class": "service-unavailable-blocker",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "Verify mediated access to downstream public services; users had to complete verification before returning to the government service; service-access rates were below original expectations.",
+      "recommendation": "Make downstream services resilient to identity-layer failure by supporting alternate proofing, temporary continuation where policy allows, clear handoff failure states, and service-owned recovery paths.",
+      "nearest_confuser": "identity-verification-friction, because the surface describes verification failure more directly than technical unavailability.",
+      "validation_path": "Audit every downstream service dependency on Verify and simulate provider-selection failure, proofing failure, timeout, and failed return-to-service states.",
+      "stop_or_repair_rule": "Reclassify as identity-verification-friction if blocking comes from eligibility/proofing design rather than outages, timeouts, or integration failures."
+    }
+  ]
+}

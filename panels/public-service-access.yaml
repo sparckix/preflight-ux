@@ -1,0 +1,17 @@
+id: public-service-access
+description: "Focused panel for high-stakes identity, benefits, public-service, and access flows."
+personas:
+  ux_experts:
+    - sara-ux-researcher
+    - jamie-accessibility
+  user_types:
+    - aisha-policy-researcher
+    - tom-random-visitor
+intended_use:
+  - "public-service access review"
+  - "identity and verification risk detection"
+  - "inclusion and vulnerable-user access review"
+not_intended_for:
+  - "brand critique"
+  - "growth optimization"
+  - "expert-operator tooling review"

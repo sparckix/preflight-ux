@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://synthetic-ux-panels.local/schemas/meta.schema.json",
+  "title": "Preflight UX Benchmark Metadata",
+  "type": "object",
+  "required": [
+    "slug",
+    "product_name",
+    "launch_date",
+    "surface_version",
+    "benchmark_status",
+    "source_quality",
+    "reviewer",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "product_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "launch_date": {
+      "type": "string",
+      "minLength": 1
+    },
+    "surface_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_status": {
+      "type": "string",
+      "enum": ["draft", "ready", "scored"]
+    },
+    "source_quality": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

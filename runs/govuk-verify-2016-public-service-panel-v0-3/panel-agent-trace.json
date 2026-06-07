@@ -1,0 +1,85 @@
+{
+  "personas": [
+    {
+      "command_preview": [
+        "codex",
+        "exec",
+        "--skip-git-repo-check",
+        "--cd",
+        "/Users/daalami/preflight-ux",
+        "--sandbox",
+        "read-only",
+        "<prompt>"
+      ],
+      "finding_count": 4,
+      "model": "default",
+      "persona": "sara-ux-researcher",
+      "raw_output_archived": true,
+      "raw_output_storage": "internal/archive/raw-model-outputs",
+      "runtime": "codex",
+      "stderr_present": true,
+      "timestamp": 1780790127
+    },
+    {
+      "command_preview": [
+        "codex",
+        "exec",
+        "--skip-git-repo-check",
+        "--cd",
+        "/Users/daalami/preflight-ux",
+        "--sandbox",
+        "read-only",
+        "<prompt>"
+      ],
+      "finding_count": 3,
+      "model": "default",
+      "persona": "jamie-accessibility",
+      "raw_output_archived": true,
+      "raw_output_storage": "internal/archive/raw-model-outputs",
+      "runtime": "codex",
+      "stderr_present": true,
+      "timestamp": 1780790148
+    },
+    {
+      "command_preview": [
+        "codex",
+        "exec",
+        "--skip-git-repo-check",
+        "--cd",
+        "/Users/daalami/preflight-ux",
+        "--sandbox",
+        "read-only",
+        "<prompt>"
+      ],
+      "finding_count": 4,
+      "model": "default",
+      "persona": "aisha-policy-researcher",
+      "raw_output_archived": true,
+      "raw_output_storage": "internal/archive/raw-model-outputs",
+      "runtime": "codex",
+      "stderr_present": true,
+      "timestamp": 1780790171
+    },
+    {
+      "command_preview": [
+        "codex",
+        "exec",
+        "--skip-git-repo-check",
+        "--cd",
+        "/Users/daalami/preflight-ux",
+        "--sandbox",
+        "read-only",
+        "<prompt>"
+      ],
+      "finding_count": 4,
+      "model": "default",
+      "persona": "tom-random-visitor",
+      "raw_output_archived": true,
+      "raw_output_storage": "internal/archive/raw-model-outputs",
+      "runtime": "codex",
+      "stderr_present": true,
+      "timestamp": 1780790198
+    }
+  ],
+  "schema": "preflight-panel-agent-trace-v1"
+}

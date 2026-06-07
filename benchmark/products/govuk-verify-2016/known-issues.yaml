@@ -1,0 +1,39 @@
+issues:
+  - id: difficulty-signing-up
+    class: identity-verification-friction
+    description: "Members of the public had difficulty signing up and proving identity, blocking access to services."
+    severity: severe
+    surfaced_by: "public-service users and parliamentary review"
+    sources:
+      - title: "Government flagship digital identification system failing its users"
+        url: "https://committees.parliament.uk/committee/127/public-accounts-committee/news/98272/government-flagship-digital-identification-system-failing-its-users/"
+        date: "2019-05-08"
+      - title: "Accessing public services through the Government's Verify digital system"
+        url: "https://publications.parliament.uk/pa/cm201719/cmselect/cmpubacc/1748/174803.htm"
+        date: "2019-05-08"
+    notes: "Ground truth comes from PAC summary and report."
+
+  - id: access-to-services-blocked
+    class: service-unavailable-blocker
+    description: "Users were unable to access multiple government services after problems in the verification flow."
+    severity: severe
+    surfaced_by: "public-service users and parliamentary review"
+    sources:
+      - title: "Accessing public services through the Government's Verify digital system"
+        url: "https://publications.parliament.uk/pa/cm201719/cmselect/cmpubacc/1748/174803.htm"
+        date: "2019-05-08"
+      - title: "Gov.uk Verify has 'failed users' and its leaders lack accountability, say MPs"
+        url: "https://www.computerweekly.com/news/252462967/Govuk-Verify-has-failed-users-and-its-leaders-lack-accountability-say-MPs"
+        date: "2019-05-08"
+    notes: "Use when a persona predicts blocked downstream access, not just annoyance."
+
+  - id: vulnerable-users-affected
+    class: vulnerable-user-access-barrier
+    description: "Some vulnerable users, including people applying for Universal Credit, were among the worst affected by Verify's access problems."
+    severity: severe
+    surfaced_by: "parliamentary review"
+    sources:
+      - title: "Accessing public services through the Government's Verify digital system"
+        url: "https://publications.parliament.uk/pa/cm201719/cmselect/cmpubacc/1748/174803.htm"
+        date: "2019-05-08"
+    notes: "This captures disproportionate access impact rather than a purely mechanical accessibility defect."

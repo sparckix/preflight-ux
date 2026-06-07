@@ -1,0 +1,102 @@
+{
+  "run_type": "baseline",
+  "run_id": "apple-maps-2012-heuristic-evaluation",
+  "surface": {
+    "type": "benchmark",
+    "ref": "benchmark/products/apple-maps-2012/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-heuristic-evaluation-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "heuristic-evaluation",
+    "prompt_ref": "runs/apple-maps-2012-heuristic-evaluation/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Default maps replacement risk: the launch surface made unreliable location data the built-in path for search, lookup, routing, and navigation.",
+      "issue_class": "data-quality-trust-break",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Apple Maps replaced the previously trusted Google Maps default, and the launch version contained missing, misplaced, or inaccurate locations and landmarks. Users relied on map search, landmarks, routing, and navigation.",
+      "recommendation": "Do not make the new map data source the default until core location, landmark, and routing accuracy meets a launch threshold. Add pre-launch geographic coverage audits, high-risk POI validation, staged rollout, and visible issue reporting for wrong places or routes.",
+      "nearest_confuser": "trust-without-provenance, because provenance would help, but the primary supplied failure is incorrect or missing map data.",
+      "validation_path": "Benchmark search, landmark placement, and route accuracy against the previous default and known ground truth across representative cities, suburbs, rural areas, and high-traffic destination categories.",
+      "stop_or_repair_rule": "Drop only if launch data quality is shown to be at parity with the prior default for core journeys; otherwise treat as a launch blocker for default replacement."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Transit directions removal likely regressed a familiar high-frequency workflow for users who expected parity with the prior default Maps experience.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Public transit directions were absent compared with the prior default, while users relied on routing and transit information.",
+      "recommendation": "Preserve transit directions through first-party support, embedded partner results, or a clearly integrated handoff before replacing the default. If parity is not ready, keep the previous default or present a transit-specific fallback at the moment of need.",
+      "nearest_confuser": "navigation-discoverability, but the problem is not merely finding transit; the supplied surface says transit directions were absent.",
+      "validation_path": "Run task tests for common transit journeys before and after replacement, measuring completion rate, added steps, fallback use, and abandonment.",
+      "stop_or_repair_rule": "Revise if transit is available through a clear in-flow alternative; keep severe if users must leave the app or remember another tool to complete the route."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The product likely responded with normal Maps affordances even when coverage or correctness was weak, creating overconfident outputs in a real-world utility context.",
+      "issue_class": "out-of-distribution-handling",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "The launch version contained missing, misplaced, or inaccurate locations and landmarks, and the benchmark is framed as a default utility app with real-world consequences.",
+      "recommendation": "Expose low-confidence states for weak geographies, uncertain POIs, incomplete transit coverage, and questionable routes. Provide explicit alternatives such as 'verify location', 'open web result', or 'use another maps provider' before navigation begins.",
+      "nearest_confuser": "data-quality-trust-break, which covers the underlying bad data; this finding covers the missing handling when the app cannot safely answer.",
+      "validation_path": "Seed tests with known incomplete, ambiguous, or wrong map records and verify whether the UI signals uncertainty rather than presenting a confident destination or route.",
+      "stop_or_repair_rule": "Drop if the launch surface already labels weak coverage and prevents confident navigation from uncertain results; otherwise repair before broad default rollout."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Replacing a trusted provider without visible confidence, source, or freshness cues risks forcing users to trust opaque map results.",
+      "issue_class": "trust-without-provenance",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "Apple Maps replaced the previously trusted Google Maps default, while the launch version had missing, misplaced, or inaccurate locations and landmarks.",
+      "recommendation": "Add provenance and trust cues for critical results: data source attribution where useful, last-updated signals for POIs, confidence markers for ambiguous matches, and an easy correction/reporting path.",
+      "nearest_confuser": "data-quality-trust-break, because inaccurate data is the sharper issue; provenance is the trust repair layer.",
+      "validation_path": "Observe whether users can understand why a result was chosen, how current it is, and what to do when it looks wrong.",
+      "stop_or_repair_rule": "Defer if map accuracy is demonstrably high enough that provenance is not needed for ordinary use; retain for high-stakes navigation and disputed locations."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Recovery depended on users switching to third-party or web-map alternatives after failure, which is a weak recovery model for a default utility.",
+      "issue_class": "agency-removed",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "Apple recommended third-party or web-map alternatives while improving Maps.",
+      "recommendation": "Build recovery into the Maps flow: report wrong result, choose alternate provider for this route, open web map, correct pin, save a corrected location, and retry search with suggested variants.",
+      "nearest_confuser": "support-channel-failure, but the supplied surface describes alternative-product guidance rather than failed support operations.",
+      "validation_path": "Test failed search, wrong landmark, and bad route scenarios to see whether users can recover inside the task without abandoning Maps entirely.",
+      "stop_or_repair_rule": "Revise if alternatives are integrated contextually and preserve the user's task state; keep if the primary repair path is external advice."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The launch likely violated match-to-expectations because users brought Google Maps-era expectations for search, landmarks, routing, and transit into the replacement default.",
+      "issue_class": "domain-mismatch-trust-break",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "Apple Maps replaced the previously trusted Google Maps default, users relied on map search, landmarks, routing, and transit information, and transit directions were absent while locations and landmarks could be wrong.",
+      "recommendation": "Set expectations at replacement points: disclose major gaps, preserve previous-provider access for unsupported tasks, and avoid presenting the new app as a like-for-like default until core expectations are met.",
+      "nearest_confuser": "interaction-cost-regression, which is more specific for transit; this broader finding concerns expectation mismatch across the replacement surface.",
+      "validation_path": "Interview and usability-test existing iOS Maps users on expected feature parity and trust before forcing the default switch.",
+      "stop_or_repair_rule": "Drop if launch messaging and fallback behavior clearly explain non-parity before users depend on the app; otherwise keep as a trust risk."
+    }
+  ]
+}

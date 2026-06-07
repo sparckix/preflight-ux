@@ -1,0 +1,25 @@
+id: default
+description: "Seed panel for early-stage AI/productivity tools."
+personas:
+  ux_experts:
+    - maya-editorial-designer
+    - daniel-k-operator-tool
+    - sara-ux-researcher
+    - jamie-accessibility
+    - rio-growth-brand
+  user_types:
+    - priya-mba-deadline
+    - marcus-junior-consultant
+    - elena-founder-skeptical
+    - greg-pe-partner
+    - aisha-policy-researcher
+    - yuki-ai-researcher
+    - tom-random-visitor
+intended_use:
+  - "pre-ship critique"
+  - "first-use risk detection"
+  - "trust and accessibility review"
+not_intended_for:
+  - "pricing validation"
+  - "market sizing"
+  - "replacement for real user research"

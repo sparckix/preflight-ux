@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "Preflight UX"
+message: "If you use this toolkit in research or product work, please cite it."
+type: software
+authors:
+  - family-names: Rodriguez
+    given-names: Maria
+  - family-names: Alami
+    given-names: Daniel
+abstract: "A toolkit for benchmark-calibrated pre-ship UX risk detection using structured LLM persona panels."
+license: MIT
+date-released: "2026-05-12"
+version: "0.1.0"

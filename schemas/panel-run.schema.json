@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://preflight-ux.local/schemas/panel-run.schema.json",
+  "title": "Preflight UX Run",
+  "type": "object",
+  "required": ["run_id", "surface", "model", "prompt_version", "date", "personas", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "run_type": {
+      "type": "string",
+      "enum": ["panel", "baseline"]
+    },
+    "surface": {
+      "type": "object",
+      "required": ["type", "ref"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string", "enum": ["benchmark", "url", "screenshot", "spec", "prototype", "pr"] },
+        "ref": { "type": "string", "minLength": 1 },
+        "hash": { "type": "string" }
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["provider", "name"],
+      "additionalProperties": true,
+      "properties": {
+        "provider": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string" },
+        "temperature": { "type": "number" }
+      }
+    },
+    "prompt_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "minLength": 1
+    },
+    "personas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "required": ["kind", "prompt_ref"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "enum": ["generic-critique", "heuristic-evaluation"] },
+        "prompt_ref": { "type": "string", "minLength": 1 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "raw_finding", "issue_class", "severity", "confidence"],
+        "anyOf": [
+          { "required": ["persona"] },
+          { "required": ["source"] }
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "persona": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "source": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "raw_finding": { "type": "string", "minLength": 1 },
+          "issue_class": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "severity": { "type": "string", "enum": ["minor", "moderate", "severe"] },
+          "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+          "evidence": { "type": "string" },
+          "recommendation": { "type": "string" }
+        }
+      }
+    }
+  }
+}

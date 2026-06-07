@@ -1,0 +1,39 @@
+issues:
+  - id: stories-mixed-with-messages
+    class: information-architecture-overload
+    description: "The redesign mixed friend Stories with private messages, confusing users who expected separate mental models for chat and Stories."
+    severity: severe
+    surfaced_by: "existing Snapchat users and app-store reviewers"
+    sources:
+      - title: "Snapchat's big redesign bashed in 83% of user reviews"
+        url: "https://techcrunch.com/2018/01/11/snapchat-redesign-uninstall/"
+        date: "2018-01-11"
+      - title: "Snapchat update: more than 800,000 angry users sign petition to change redesign"
+        url: "https://www.theguardian.com/technology/2018/feb/13/snapchat-update-redesign-users-sign-petition-undo-new-change-back"
+        date: "2018-02-13"
+    notes: "TechCrunch reported confusion around Stories appearing between private messages; Guardian described Stories appearing with Snaps and direct messages."
+
+  - id: harder-to-find-friends
+    class: navigation-discoverability
+    description: "The redesigned Friends/Stories surfaces made it harder for users to find familiar friend-story destinations."
+    severity: moderate
+    surfaced_by: "existing Snapchat users"
+    sources:
+      - title: "Here's why Snapchat users are so upset about its recent redesign"
+        url: "https://www.cnbc.com/2018/02/12/why-the-snapchat-redesign-is-so-bad.html"
+        date: "2018-02-12"
+      - title: "Snapchat update: more than 800,000 angry users sign petition to change redesign"
+        url: "https://www.theguardian.com/technology/2018/feb/13/snapchat-update-redesign-users-sign-petition-undo-new-change-back"
+        date: "2018-02-13"
+    notes: "The issue is scored as navigation discoverability around friend Stories, not generic dislike of the redesign."
+
+  - id: rewatching-stories-cost
+    class: interaction-cost-regression
+    description: "Rewatching Stories became slower and more effortful than in the previous version."
+    severity: moderate
+    surfaced_by: "existing Snapchat users"
+    sources:
+      - title: "Here's why Snapchat users are so upset about its recent redesign"
+        url: "https://www.cnbc.com/2018/02/12/why-the-snapchat-redesign-is-so-bad.html"
+        date: "2018-02-12"
+    notes: "Good test for personas that notice repeat-use workflow regressions; TechCrunch describes the loss of automatic Story advancement."

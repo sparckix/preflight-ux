@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/panel.js", "use": "@vercel/node" },
+    { "src": "web/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/panel", "dest": "/api/panel.js" },
+    { "src": "/", "dest": "/web/index.html" },
+    { "src": "/app", "dest": "/web/index.html" },
+    { "src": "/example", "dest": "/web/example.html" },
+    { "src": "/web/(.*)", "dest": "/web/$1" }
+  ],
+  "headers": [
+    {
+      "source": "/web/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
+  ]
+}

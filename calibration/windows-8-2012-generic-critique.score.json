@@ -1,0 +1,36 @@
+{
+  "baseline_kind": "generic-critique",
+  "f1": 0.6666666666666666,
+  "false_positives": [
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability"
+  ],
+  "hits": [
+    "hidden-feature-discoverability",
+    "operator-density-undershoot",
+    "register-fighting"
+  ],
+  "misses": [],
+  "notes": "Preliminary class-level score. Human scorer review is required for issue-level calibration.",
+  "precision": 0.5,
+  "predicted_classes": [
+    "hidden-feature-discoverability",
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability",
+    "operator-density-undershoot",
+    "register-fighting"
+  ],
+  "recall": 1.0,
+  "run_id": "windows-8-2012-generic-critique",
+  "run_type": "baseline",
+  "score_type": "class-level-preliminary",
+  "severity_weighted_recall": 1.0,
+  "surface": "benchmark/products/windows-8-2012/surface.md",
+  "truth_classes": [
+    "hidden-feature-discoverability",
+    "operator-density-undershoot",
+    "register-fighting"
+  ]
+}

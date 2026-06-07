@@ -1,0 +1,102 @@
+{
+  "run_type": "baseline",
+  "run_id": "healthcare-gov-2013-generic-critique",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/healthcare-gov-2013/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-generic-critique-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "generic-critique",
+    "prompt_ref": "runs/healthcare-gov-2013-generic-critique/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Requiring registration before plan browsing may create a high-friction commitment gate before users can judge whether the marketplace is useful or relevant.",
+      "issue_class": "account-before-value",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says users had to register before browsing plans in many cases, account creation was one of the first steps, and browsing without registering was added or improved after launch.",
+      "recommendation": "Move anonymous plan browsing, eligibility preview, pricing range, or plan comparison ahead of account creation wherever legally and technically possible. Require account creation only when saving, applying, enrolling, or accessing personalized protected data.",
+      "nearest_confuser": "identity-verification-friction, because identity checks may also block access; this finding is specifically about value inspection being gated by registration.",
+      "validation_path": "Review the launch flow map and confirm whether a first-time user can inspect meaningful plan options before creating an account. Test with realistic unauthenticated scenarios across eligibility and location paths.",
+      "stop_or_repair_rule": "Drop or downgrade if regulation or security required account creation before any plan preview and the surface clearly explained why before asking for registration."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Core enrollment access appears exposed to blocking reliability failures during the first required account step, creating risk that users cannot reach plan browsing or enrollment before the deadline.",
+      "issue_class": "service-unavailable-blocker",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface reports long waits, blank screens, error messages, invalid account states, multiple backend systems, and a high-stakes public-service enrollment deadline.",
+      "recommendation": "Add launch-readiness gates for account creation and plan browsing: synthetic monitoring, load testing across dependent systems, circuit breakers, retry-safe states, clear maintenance messaging, and a fallback path that lets users browse or continue later without losing progress.",
+      "nearest_confuser": "form-submission-blocker, because some failures may happen inside registration forms; this risk is broader service availability across the launch flow.",
+      "validation_path": "Run end-to-end reliability tests through registration, identity/security checks, account state creation, and plan browsing under launch traffic assumptions. Track blank screens, unrecoverable errors, timeout rates, and account-state inconsistencies.",
+      "stop_or_repair_rule": "Revise to form-submission-blocker if evidence shows failures are isolated to form validation or submission rather than service availability."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Long waits and blank screens during first-use onboarding may leave users unable to distinguish normal processing from failure.",
+      "issue_class": "loading-abandonment",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface explicitly reports long waits and blank screens before users could inspect options, in a flow where account creation was one of the first steps.",
+      "recommendation": "Replace blank or indefinite waits with explicit progress states, expected timing, retry guidance, saved-progress confirmation, and a non-blocking path back to plan browsing or support information when processing exceeds thresholds.",
+      "nearest_confuser": "service-unavailable-blocker, because some waits may be outages; this finding focuses on missing or inadequate feedback while waiting.",
+      "validation_path": "Instrument wait duration, loading-state copy, timeout behavior, and user-visible recovery options for account creation and identity/security steps.",
+      "stop_or_repair_rule": "Drop if waits are consistently under one second or if every long-running operation already provides accurate progress, status, and recovery."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Identity and security dependencies before plan inspection may create eligibility access risk if verification leaves users in invalid or unrecoverable account states.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "The surface says account creation required multiple backend systems and identity/security steps before users could inspect options, and users encountered invalid account states.",
+      "recommendation": "Separate low-risk browsing from identity proofing. For required verification, provide clear failure reasons, recovery paths, alternate proofing channels, status tracking, and manual remediation queues before enrollment deadlines.",
+      "nearest_confuser": "account-before-value, because both involve early registration friction; this finding is specifically about identity/security steps failing or blocking downstream access.",
+      "validation_path": "Audit all identity/security failure modes and account-state transitions. Confirm whether users can recover from mismatched, pending, duplicate, locked, or partially created account states without starting over.",
+      "stop_or_repair_rule": "Downgrade if identity/security checks occur only after users have already browsed plans or if invalid account states are rare, self-healing, and clearly explained."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Registration errors may function as form-submission blockers when account creation is required before the primary marketplace task.",
+      "issue_class": "form-submission-blocker",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "The surface reports account creation as an early required step in many cases, plus error messages and invalid account states before users could inspect options.",
+      "recommendation": "Make registration submissions idempotent, preserve entered data, provide field-level and system-level recovery guidance, and allow users to resume or browse without completing registration when submission dependencies fail.",
+      "nearest_confuser": "service-unavailable-blocker, because errors may come from backend outages; this finding applies if the blocker is experienced as an unsubmitable or unrecoverable registration form.",
+      "validation_path": "Test registration with duplicate accounts, partial backend failure, timeout, identity mismatch, invalid validation responses, and retry flows. Verify users can recover without data loss.",
+      "stop_or_repair_rule": "Merge into service-unavailable-blocker if the surface evidence shows errors are outage-level rather than form-specific."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Because the marketplace served a public-service enrollment deadline, early account and system failures may create an inclusion risk for users with fewer fallback options or higher support needs.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "low",
+      "evidence": "The surface identifies the product as a high-stakes public-service enrollment deadline and reports registration-before-browsing, long waits, blank screens, errors, and invalid account states.",
+      "recommendation": "Provide deadline-safe alternatives: anonymous browsing, assisted enrollment paths, clear offline or phone fallback instructions, deadline-extension handling for blocked users, and monitoring segmented by accessibility, language, device, and support-channel needs where available.",
+      "nearest_confuser": "support-channel-failure, but the supplied surface does not describe support-channel performance; this is an access-barrier hypothesis based on public-service stakes and blocking digital failures.",
+      "validation_path": "Validate whether affected users had reliable fallback channels and whether failure rates differed by device, language, accessibility mode, geography, or assistance pathway.",
+      "stop_or_repair_rule": "Drop or keep low-confidence if no evidence emerges of disproportionate impact or fallback-channel dependence among higher-need users."
+    }
+  ]
+}

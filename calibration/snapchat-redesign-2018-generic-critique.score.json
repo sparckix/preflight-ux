@@ -1,0 +1,32 @@
+{
+  "baseline_kind": "generic-critique",
+  "f1": 0.8571428571428571,
+  "false_positives": [
+    "agency-removed"
+  ],
+  "hits": [
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability"
+  ],
+  "misses": [],
+  "notes": "Preliminary class-level score. Human scorer review is required for issue-level calibration.",
+  "precision": 0.75,
+  "predicted_classes": [
+    "agency-removed",
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability"
+  ],
+  "recall": 1.0,
+  "run_id": "snapchat-redesign-2018-generic-critique",
+  "run_type": "baseline",
+  "score_type": "class-level-preliminary",
+  "severity_weighted_recall": 1.0,
+  "surface": "benchmark/products/snapchat-redesign-2018/surface.md",
+  "truth_classes": [
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability"
+  ]
+}

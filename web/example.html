@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preflight UX Example Workflow</title>
+    <meta name="description" content="Example Preflight UX review brief, normalized findings, and report workflow." />
+    <link rel="stylesheet" href="/web/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark">PX</span>
+        <div>
+          <strong>Preflight UX</strong>
+          <span>Example workflow</span>
+        </div>
+      </div>
+      <nav class="topnav" aria-label="Primary">
+        <a href="/">App</a>
+        <a href="#brief">Brief</a>
+        <a href="#findings">Findings</a>
+        <a href="#report">Report</a>
+      </nav>
+    </header>
+
+    <main class="shell example-flow">
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Worked product example</p>
+          <h1 id="page-title">From product surface to repo-ready report.</h1>
+        </div>
+        <div class="status-strip" aria-label="Example workflow status">
+          <span>Brief</span>
+          <span>Run</span>
+          <span>Normalize</span>
+          <span>Report</span>
+        </div>
+      </section>
+
+      <section class="example-band" id="brief">
+        <h2>1. Review brief</h2>
+        <p>This example uses the Preflight UX web app itself as the product surface. The review brief combines audience, stage, prototype URL, surface notes, selected personas, and risk focus areas.</p>
+        <pre class="output-box">{
+  "artifact_type": "preflight_ux_review_brief",
+  "run_id": "preflight-ux-web-ui-2026-05-12",
+  "product": {
+    "name": "Preflight UX web UI",
+    "audience": "Product builders and design reviewers",
+    "stage": "prototype",
+    "surface_type": "prototype",
+    "prototype_url": "https://preflight-ux.vercel.app"
+  },
+  "review": { "depth": "deep", "synthesis_mode": "disagreement" },
+  "panel": {
+    "personas": ["tom-random-visitor", "jamie-accessibility", "elena-founder-skeptical"],
+    "risk_focus": ["empty-state-confusion", "trust-without-provenance", "screenshot-export-friction"]
+  }
+}</pre>
+      </section>
+
+      <section class="example-band" id="findings">
+        <h2>2. Normalized findings</h2>
+        <p>After a BYOK run, the model output is converted into editable findings. These are the rows that become `run.json` and can be scored later.</p>
+        <pre class="output-box">[
+  {
+    "id": "finding-001",
+    "persona": "tom-random-visitor",
+    "issue_class": "empty-state-confusion",
+    "severity": "moderate",
+    "confidence": "medium",
+    "raw_finding": "The first-time user may not know whether to build a brief, run a model, or export JSON first.",
+    "evidence": "The surface exposes several artifact actions in one area.",
+    "recommendation": "Keep the primary action focused on Build brief, then progressively reveal run and export actions."
+  },
+  {
+    "id": "finding-002",
+    "persona": "elena-founder-skeptical",
+    "issue_class": "trust-without-provenance",
+    "severity": "severe",
+    "confidence": "medium",
+    "raw_finding": "A skeptical user will not run BYOK unless the request path and storage posture are explicit.",
+    "evidence": "API keys and screenshots are sensitive artifacts.",
+    "recommendation": "Show request path, provider, model, prompt version, and screenshot count in every export."
+  }
+]</pre>
+      </section>
+
+      <section class="example-band" id="report">
+        <h2>3. Repo-ready report</h2>
+        <p>The final Markdown includes provenance, product surface, structured findings, raw panel output, and validation notes. It is designed to be checked into a product repo or attached to a PR.</p>
+        <pre class="output-box"># Preflight UX Report: Preflight UX web UI
+
+## Provenance
+
+- Provider/model: anthropic/claude-sonnet-4-6
+- Prompt version: web-byok-v0.4
+- Review depth: deep
+- Synthesis mode: disagreement
+- Screenshots: 2
+
+## Structured Findings
+
+### finding-001: `empty-state-confusion`
+
+- Persona: `tom-random-visitor`
+- Severity: `moderate`
+- Confidence: `medium`
+- Recommendation: Keep the primary action focused on Build brief.
+
+## Validation Notes
+
+Treat findings as pre-ship hypotheses until checked against user behavior.</pre>
+      </section>
+    </main>
+  </body>
+</html>

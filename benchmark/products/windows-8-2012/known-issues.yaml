@@ -1,0 +1,42 @@
+issues:
+  - id: dual-environment-overhead
+    class: register-fighting
+    description: "The touch-oriented Start environment and PC-oriented desktop created inconsistent interaction models and cognitive overhead."
+    severity: severe
+    surfaced_by: "experienced PC users in usability review"
+    sources:
+      - title: "Windows 8 interface called 'disappointing' by usability expert"
+        url: "https://www.pcworld.com/article/455724/windows-8-interface-called-disappointing-by-usability-expert.html"
+        date: "2012-11-19"
+      - title: "Windows 8 user interface ripped apart by Nielsen Norman Group"
+        url: "https://www.techspot.com/news/50859-windows-8-user-interface-ripped-apart-by-nielsen-norman-group.html"
+        date: "2012-11-20"
+    notes: "Use this as a register/interaction-language conflict case."
+
+  - id: hidden-charms
+    class: hidden-feature-discoverability
+    description: "Important commands were hidden in off-screen Charms, reducing discoverability for new users."
+    severity: moderate
+    surfaced_by: "usability expert review and test users"
+    sources:
+      - title: "Windows 8 interface called 'disappointing' by usability expert"
+        url: "https://www.pcworld.com/article/455724/windows-8-interface-called-disappointing-by-usability-expert.html"
+        date: "2012-11-19"
+      - title: "Interface design guru: Windows 8 is 'weak on tablets, terrible for PCs'"
+        url: "https://www.computerworld.com/article/1488168/interface-design-guru-windows-8-is-weak-on-tablets-terrible-for-pcs.html"
+        date: "2012-11-19"
+    notes: "Good benchmark for discoverability and invisible gesture risks."
+
+  - id: low-density-single-window-power-loss
+    class: operator-density-undershoot
+    description: "The Windows Store app model reduced information density and multi-window power for complex PC workflows."
+    severity: moderate
+    surfaced_by: "power users and usability reviewers"
+    sources:
+      - title: "Windows 8 interface called 'disappointing' by usability expert"
+        url: "https://www.pcworld.com/article/455724/windows-8-interface-called-disappointing-by-usability-expert.html"
+        date: "2012-11-19"
+      - title: "Usability expert tears apart Windows 8"
+        url: "https://venturebeat.com/business/usability-expert-windows-8/"
+        date: "2012-11-19"
+    notes: "This should be caught by operator-tool personas more than brand personas."

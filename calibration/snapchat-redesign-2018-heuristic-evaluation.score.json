@@ -1,0 +1,34 @@
+{
+  "baseline_kind": "heuristic-evaluation",
+  "f1": 0.7499999999999999,
+  "false_positives": [
+    "agency-removed",
+    "trust-without-provenance"
+  ],
+  "hits": [
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability"
+  ],
+  "misses": [],
+  "notes": "Preliminary class-level score. Human scorer review is required for issue-level calibration.",
+  "precision": 0.6,
+  "predicted_classes": [
+    "agency-removed",
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability",
+    "trust-without-provenance"
+  ],
+  "recall": 1.0,
+  "run_id": "snapchat-redesign-2018-heuristic-evaluation",
+  "run_type": "baseline",
+  "score_type": "class-level-preliminary",
+  "severity_weighted_recall": 1.0,
+  "surface": "benchmark/products/snapchat-redesign-2018/surface.md",
+  "truth_classes": [
+    "information-architecture-overload",
+    "interaction-cost-regression",
+    "navigation-discoverability"
+  ]
+}

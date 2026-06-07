@@ -1,0 +1,175 @@
+{
+  "run_type": "panel",
+  "run_id": "govuk-verify-2016-public-service-panel-v0-3",
+  "surface": {
+    "type": "benchmark",
+    "ref": "benchmark/products/govuk-verify-2016/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "mixed",
+    "name": "subscription-or-api-panel",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "panel-action-card-v0.3",
+  "date": "2026-06-06",
+  "personas": [
+    "sara-ux-researcher",
+    "jamie-accessibility",
+    "aisha-policy-researcher",
+    "tom-random-visitor"
+  ],
+  "findings": [
+    {
+      "id": "finding-001",
+      "persona": "sara-ux-researcher",
+      "raw_finding": "Provider selection and identity proofing created a high-friction verification step that could prevent eligible users from proving identity.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says users had to select a certified provider, supply identity information, and could fail during provider selection or identity proofing.",
+      "recommendation": "Reduce provider-choice burden, explain eligibility and evidence requirements before commitment, and provide clear alternative verification routes when a provider path fails."
+    },
+    {
+      "id": "finding-002",
+      "persona": "sara-ux-researcher",
+      "raw_finding": "Because Verify mediated access to downstream public services, verification failure became a blocker to the primary public-service task.",
+      "issue_class": "service-unavailable-blocker",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says Verify mediated access to participating government services and that completion and service-access rates were below original expectations.",
+      "recommendation": "Treat failed verification as a recoverable service-access state with visible next steps, alternative channels, and continuity back to the original government service."
+    },
+    {
+      "id": "finding-003",
+      "persona": "sara-ux-researcher",
+      "raw_finding": "The flow likely imposed unequal access costs on users with higher support needs or fewer fallback options.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface explicitly states that vulnerable or benefits-related users were among those affected in a high-stakes public-service access case.",
+      "recommendation": "Design assisted digital, non-digital, and delegated-support paths as first-class routes rather than exceptions, and monitor completion by user group and service type."
+    },
+    {
+      "id": "finding-004",
+      "persona": "sara-ux-researcher",
+      "raw_finding": "Selecting among certified identity providers may have added cognitive load at the moment users expected to access a government service.",
+      "issue_class": "information-architecture-overload",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The flow routed users from a government service into a provider-selection step before identity proofing and return to the original service.",
+      "recommendation": "Preserve the user's mental model by framing provider choice around concrete fit, required documents, completion likelihood, and recovery options, not just a list of certified companies."
+    },
+    {
+      "id": "finding-005",
+      "persona": "jamie-accessibility",
+      "raw_finding": "The verification mechanism itself created a high-stakes access failure for users who could not complete provider selection or identity proofing.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says users were routed through GOV.UK Verify, had to select a provider and complete identity proofing, and could fail during provider selection or identity proofing.",
+      "recommendation": "Provide accessible alternative verification routes, clear failure recovery, and a non-dead-end path back to the public service when provider selection or proofing fails."
+    },
+    {
+      "id": "finding-006",
+      "persona": "jamie-accessibility",
+      "raw_finding": "Because Verify mediated access to downstream public services, verification failure could block completion of the primary public-service task.",
+      "issue_class": "service-unavailable-blocker",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "The surface says Verify mediated access to downstream public services and that completion and service-access rates were below original expectations.",
+      "recommendation": "Treat verification failure as a service-access blocker: preserve the user\u2019s task context, offer assisted routes, and guarantee a fallback path for accessing the downstream service."
+    },
+    {
+      "id": "finding-007",
+      "persona": "jamie-accessibility",
+      "raw_finding": "The flow likely created an inclusion barrier for users with higher support needs or fewer fallback options.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface explicitly says vulnerable or benefits-related users were among those affected in a high-stakes identity and public-service access case.",
+      "recommendation": "Design and validate assisted digital support, inclusive identity evidence options, and fallback channels specifically for benefits-related and vulnerable users before requiring digital verification."
+    },
+    {
+      "id": "finding-008",
+      "persona": "aisha-policy-researcher",
+      "raw_finding": "A cautious policy researcher would likely treat provider selection plus identity proofing as a high-friction gate that can fail before the public-service task begins.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says users were routed through GOV.UK Verify, had to select a provider, supply identity information, and could fail during provider selection or identity proofing.",
+      "recommendation": "Add clearer provider-fit guidance, pre-check eligibility signals, and a visible fallback route before users commit sensitive identity information."
+    },
+    {
+      "id": "finding-009",
+      "persona": "aisha-policy-researcher",
+      "raw_finding": "Failure inside Verify would likely be experienced as inability to reach the downstream public service, not merely as an identity-product problem.",
+      "issue_class": "service-unavailable-blocker",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Verify mediated access to downstream public services, and completion and service-access rates were below original expectations.",
+      "recommendation": "Provide a non-digital or assisted route when verification fails, and make return-to-service recovery explicit rather than leaving the user stranded in the identity layer."
+    },
+    {
+      "id": "finding-010",
+      "persona": "aisha-policy-researcher",
+      "raw_finding": "The flow would likely raise inclusion risk because vulnerable or benefits-related users were among those affected by the access barrier.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface states that vulnerable or benefits-related users were among those affected, in a high-stakes public-service access case.",
+      "recommendation": "Design and measure fallback support specifically for benefits-related and higher-support users, with parity targets for completion and service access."
+    },
+    {
+      "id": "finding-011",
+      "persona": "aisha-policy-researcher",
+      "raw_finding": "The need to choose a certified company before completing a government-service task would likely create early commitment friction and uncertainty about whether the route is appropriate.",
+      "issue_class": "account-before-value",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The flow required users to select a provider and supply identity information before returning to the government service.",
+      "recommendation": "Explain why a third-party provider is required, what data is shared, what success depends on, and what alternatives exist before provider selection."
+    },
+    {
+      "id": "finding-012",
+      "persona": "tom-random-visitor",
+      "raw_finding": "A first-time visitor would likely experience the Verify handoff as commitment before visible value because identity proofing is required before service access.",
+      "issue_class": "account-before-value",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Users attempting to access participating government services were routed through GOV.UK Verify, then had to select a provider, supply identity information, and complete verification before returning to the government service.",
+      "recommendation": "Before provider selection, show a concrete preview of the exact downstream access benefit, required documents, expected time, and fallback routes so users understand the value and cost before committing sensitive information."
+    },
+    {
+      "id": "finding-013",
+      "persona": "tom-random-visitor",
+      "raw_finding": "Provider selection and identity proofing would likely become the main abandonment point for users who cannot quickly tell which path will work for them.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface reports that users could fail during provider selection or identity proofing, and completion rates were below original expectations.",
+      "recommendation": "Add an eligibility triage step before provider choice, explain why each provider is recommended, expose document requirements up front, and provide a clear non-digital or assisted route when no provider is likely to work."
+    },
+    {
+      "id": "finding-014",
+      "persona": "tom-random-visitor",
+      "raw_finding": "Verification failure would likely block the actual public-service task, not just the identity step.",
+      "issue_class": "service-unavailable-blocker",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Verify mediated access to downstream public services, users had to complete verification before returning to the government service, and service-access rates were below expectations.",
+      "recommendation": "Make failed verification recoverable inside the service journey with saved progress, explicit retry paths, direct assisted support, and a way to continue through an alternative identity route without restarting."
+    },
+    {
+      "id": "finding-015",
+      "persona": "tom-random-visitor",
+      "raw_finding": "The flow would likely create disproportionate access risk for users with higher support needs or fewer fallback options.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The product surface states that vulnerable or benefits-related users were among those affected, and the case is a high-stakes identity and public-service access flow.",
+      "recommendation": "Treat assisted access as a core path rather than an exception: publish accessible fallback options before verification begins, route failed users to human support, and monitor completion by service type and support need."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "baseline_kind": "heuristic-evaluation",
+  "f1": 0.5,
+  "false_positives": [
+    "agency-removed",
+    "domain-mismatch-trust-break",
+    "interaction-cost-regression",
+    "out-of-distribution-handling"
+  ],
+  "hits": [
+    "data-quality-trust-break",
+    "trust-without-provenance"
+  ],
+  "misses": [],
+  "notes": "Preliminary class-level score. Human scorer review is required for issue-level calibration.",
+  "precision": 0.3333333333333333,
+  "predicted_classes": [
+    "agency-removed",
+    "data-quality-trust-break",
+    "domain-mismatch-trust-break",
+    "interaction-cost-regression",
+    "out-of-distribution-handling",
+    "trust-without-provenance"
+  ],
+  "recall": 1.0,
+  "run_id": "apple-maps-2012-heuristic-evaluation",
+  "run_type": "baseline",
+  "score_type": "class-level-preliminary",
+  "severity_weighted_recall": 1.0,
+  "surface": "benchmark/products/apple-maps-2012/surface.md",
+  "truth_classes": [
+    "data-quality-trust-break",
+    "trust-without-provenance"
+  ]
+}

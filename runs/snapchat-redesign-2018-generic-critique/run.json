@@ -1,0 +1,102 @@
+{
+  "run_type": "baseline",
+  "run_id": "snapchat-redesign-2018-generic-critique",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/snapchat-redesign-2018/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-generic-critique-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "generic-critique",
+    "prompt_ref": "runs/snapchat-redesign-2018-generic-critique/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Existing daily users may lose their mental model for where friend Stories live because friend Stories are moved from the familiar chronological Story list into the Friends page alongside private messages.",
+      "issue_class": "navigation-discoverability",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says friend Stories appeared interleaved with private messaging rather than in the previous Stories area, and personas should treat this as an existing social app with habitual daily use and a changed navigation model.",
+      "recommendation": "Add explicit wayfinding for moved friend Stories: a persistent Stories affordance or tab inside Friends, visible labels separating Chats/Snaps/Stories, and a short migration cue explaining where Stories moved.",
+      "nearest_confuser": "information-architecture-overload, because the same evidence also suggests mixed content types may make the page harder to parse.",
+      "validation_path": "Run regression tasks with existing-user personas: find a specific friend's Story, browse recent friend Stories, and return to chats. Compare time, misnavigation, and recovery against the prior chronological model.",
+      "stop_or_repair_rule": "Drop or reduce severity if users can reliably locate friend Stories without prompts and without elevated task time versus the prior interface."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Combining incoming Snaps, chats, and friend Stories in one algorithmically sorted Friends page may overload the information architecture for a habitual social workflow that previously separated communication modes more clearly.",
+      "issue_class": "information-architecture-overload",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The Friends page combined incoming Snaps, chats, and friend Stories in one place; friend content was no longer presented in the previous familiar chronological Story list; the page was algorithmically sorted rather than simply chronological.",
+      "recommendation": "Preserve clear grouping inside Friends: separate sections or filters for Chats, Snaps, and Stories; keep labels visible; provide a chronological toggle or recency grouping for users scanning social updates.",
+      "nearest_confuser": "navigation-discoverability, if the primary failure is finding the relocated destination rather than parsing the combined feed once found.",
+      "validation_path": "Test scan tasks: identify unread private messages, find newest friend Story, and distinguish media/social items. Look for misclassification, backtracking, or verbalized confusion about what the page contains.",
+      "stop_or_repair_rule": "Revise if testing shows users understand the combined page but object mainly to ranking order or task effort."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Algorithmic sorting on the Friends page may weaken users' ability to predict where recent social content appears, especially for an app with daily habitual scanning patterns.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface states the Friends page was algorithmically sorted rather than simply chronological, replacing the prior familiar chronological Story list.",
+      "recommendation": "Offer a recency-based view, visible sorting explanation, or stable grouping such as Recent, Unread, and Stories. Avoid requiring users to infer ranking behavior while completing core social tasks.",
+      "nearest_confuser": "trust-without-provenance is less fitting because the issue is not about trusting generated output, but about predictability and effort in a core navigation flow.",
+      "validation_path": "Ask existing-user personas to find the most recent update from a named friend and to explain why items appear in their current order. Measure errors and perceived predictability.",
+      "stop_or_repair_rule": "Lower severity if the ranking has clear labels, predictable recency anchors, or users can switch to chronological order."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-generic-critique",
+      "raw_finding": "The redesigned send flow may regress a core task by making friend selection feel harder for existing users who frequently send Snaps.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface explicitly reports that the send flow made finding friends feel harder for existing users.",
+      "recommendation": "Audit the send flow for friend-finding friction: prioritize recent/frequent recipients, keep search prominent, preserve muscle-memory positions where feasible, and support fast multi-select without extra navigation.",
+      "nearest_confuser": "navigation-discoverability, if the main issue is that the friend picker or search moved rather than the send task gaining steps or effort.",
+      "validation_path": "Run send-task regressions: send to one close friend, send to a group, and find a less recent friend. Compare steps, search usage, hesitation, and failed selections to the prior flow.",
+      "stop_or_repair_rule": "Keep only as moderate if friction is isolated to edge cases, such as rarely contacted friends, and frequent-recipient sending remains fast."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Rewatching Stories may become a workflow regression if the redesign adds effort to a repeated social-media behavior that was easier in the prior interface.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "moderate",
+      "confidence": "high",
+      "evidence": "The surface states that rewatching Stories required more effort than in the prior interface.",
+      "recommendation": "Make rewatch controls and recently viewed Stories easy to access from the same context where viewing ends. Consider a visible replay affordance, recently watched section, or stable back path to the friend Story.",
+      "nearest_confuser": "hidden-feature-discoverability, if rewatch exists but is hidden behind an unfamiliar gesture rather than simply requiring more steps.",
+      "validation_path": "Test after-view tasks: rewatch the same friend's Story, rewatch a previous Story after opening another chat, and browse back to a Story list. Track steps and failed attempts.",
+      "stop_or_repair_rule": "Drop if rewatch is intentionally deprioritized for product reasons and the team accepts the tradeoff; otherwise revise severity based on frequency of the task."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Because users cannot revert after updating, any navigation or workflow regression has higher launch risk: affected users have no in-product escape hatch while learning the changed model.",
+      "issue_class": "agency-removed",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "The surface states users could not revert to the previous version once updated, and the benchmark context is a redesign/regression case for an existing habitual app.",
+      "recommendation": "Provide mitigation instead of full rollback if rollback is not feasible: staged rollout, opt-in preview, temporary classic-view affordances for key flows, prominent migration guidance, and fast feedback channels tied to specific tasks.",
+      "nearest_confuser": "interaction-cost-regression, because the non-revertible update amplifies regressions but is not itself the changed task cost.",
+      "validation_path": "Validate with staged-release telemetry and qualitative sessions: monitor task completion for sending, finding Stories, and rewatching before expanding rollout.",
+      "stop_or_repair_rule": "Reduce severity if launch is opt-in, staged with rollback at the service level, or includes strong migration affordances for the affected workflows."
+    }
+  ]
+}

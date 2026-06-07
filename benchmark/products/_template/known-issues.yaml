@@ -1,0 +1,14 @@
+# Ground truth issues for this benchmark product.
+# Every issue needs a source. Prefer independent sources for severe issues.
+
+issues:
+  - id: example-empty-state
+    class: empty-state-confusion
+    description: "Users did not understand what to do from the initial empty state."
+    severity: moderate
+    surfaced_by: "first-time users"
+    sources:
+      - title: "Example source title"
+        url: "https://example.com/postmortem"
+        date: "2026-01-01"
+    notes: "Replace this example before submitting a real benchmark entry."

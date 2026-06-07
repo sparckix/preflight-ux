@@ -1,0 +1,115 @@
+{
+  "run_type": "baseline",
+  "run_id": "govuk-verify-2016-heuristic-evaluation",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/govuk-verify-2016/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-heuristic-evaluation-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "heuristic-evaluation",
+    "prompt_ref": "runs/govuk-verify-2016-heuristic-evaluation/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The identity proofing step appears to be a primary access failure point, making the launch surface risky for high-stakes public-service access.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says users had to select a provider, supply identity information, and complete verification before returning to the government service; users could fail during provider selection or identity proofing; completion and service-access rates were below expectations.",
+      "recommendation": "Treat verification failure as a launch-blocking product risk: add clearer eligibility guidance before provider choice, reduce duplicate identity entry, expose step-by-step status, and provide a guaranteed non-digital or assisted route when verification cannot be completed.",
+      "nearest_confuser": "form-submission-blocker, but the supplied evidence identifies identity proofing itself as the gating failure rather than a generic form submission issue.",
+      "validation_path": "Measure provider-selection start-to-success funnels, identity-proofing abandonment, retry rates, and downstream service access by provider and user segment.",
+      "stop_or_repair_rule": "Drop or downgrade if logs show verification succeeds reliably and low completion is caused by unrelated downstream-service abandonment."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The mediated provider-selection model likely imposed a mental-model burden at the exact point where users expected to access a government service.",
+      "issue_class": "information-architecture-overload",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "Verify mediated access to downstream public services and required users to select a certified company before completing identity proofing; users could fail during provider selection.",
+      "recommendation": "Make the relationship between GOV.UK, the certified company, and the target public service explicit at the point of choice. Offer a recommended route, eligibility checks, plain-language comparison criteria, and a clear explanation of what happens after choosing a provider.",
+      "nearest_confuser": "navigation-discoverability; the risk is broader than finding a destination because users must understand a multi-party identity architecture before proceeding.",
+      "validation_path": "Run first-click and comprehension testing on provider selection: ask users what they think each provider does, whether they trust it, and which one they should choose.",
+      "stop_or_repair_rule": "Revise if observed failures are caused by individual provider outages or proofing rules rather than confusion about the provider-selection model."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The flow placed high-friction identity proofing before users could complete the intended public-service task, creating a commitment barrier before service value was realized.",
+      "issue_class": "account-before-value",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "Users attempting to access participating government services were routed through Verify and had to select a provider, supply identity information, and complete verification before returning to the government service.",
+      "recommendation": "Before identity proofing, show users whether the service supports Verify, what documents or records are needed, expected time, alternatives, and what benefit they will unlock after completion. Defer unnecessary data collection until the user has confirmed they can proceed.",
+      "nearest_confuser": "identity-verification-friction; this finding focuses on sequencing and commitment cost, while verification-friction focuses on the proofing failure itself.",
+      "validation_path": "Compare abandonment before and after pre-checks, document-readiness prompts, and alternative-route messaging.",
+      "stop_or_repair_rule": "Downgrade if legal or security constraints require identity proofing first and the surface already explains value, requirements, and alternatives clearly."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The surface likely lacked sufficient recovery paths when users failed provider selection or proofing, risking permanent exclusion from the downstream service.",
+      "issue_class": "agency-removed",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "Users could fail during provider selection or identity proofing before returning to the government service, and service-access rates were below original expectations.",
+      "recommendation": "Add explicit recovery options at each failure point: retry with another provider, preserve progress, explain why proofing failed, provide assisted support, and return users to the government service with a clear next step rather than a dead end.",
+      "nearest_confuser": "support-channel-failure; no support-channel evidence is supplied, so the safer classification is loss of user control after a blocking verification outcome.",
+      "validation_path": "Audit failure screens and event logs for whether users can retry, switch provider, save progress, get help, or use an alternative access route.",
+      "stop_or_repair_rule": "Drop if failure states already provide reliable, understandable recovery and users who fail Verify successfully complete through another route."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The launch surface created disproportionate access risk for users with higher support needs in benefits or other vulnerable contexts.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface says vulnerable or benefits-related users were among those affected, and the benchmark is a high-stakes identity and public-service access case.",
+      "recommendation": "Segment outcomes for vulnerable and benefits-related users, provide assisted digital support, preserve offline channels, avoid making Verify the only practical route, and test with users who have low digital confidence, thin credit files, limited documents, or urgent benefit needs.",
+      "nearest_confuser": "identity-verification-friction; this is specifically about disproportionate public-service access harm to vulnerable groups.",
+      "validation_path": "Measure completion, failure reason, support contact, and eventual service access by benefit type, vulnerability marker, device access, document availability, and digital-confidence segment.",
+      "stop_or_repair_rule": "Revise if affected users were not disproportionately harmed or if robust alternative access paths fully mitigated exclusion."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The system-status model was likely insufficient for a multi-step, multi-party verification journey where users needed to know whether they were progressing toward public-service access.",
+      "issue_class": "loading-abandonment",
+      "severity": "moderate",
+      "confidence": "low",
+      "evidence": "The flow required provider selection, identity-information entry, verification completion, and return to the government service; completion and service-access rates were below expectations.",
+      "recommendation": "Provide persistent progress indicators, expected time, current party responsible, confirmation of saved progress, and clear handoff states when moving between Verify, the provider, and the downstream service.",
+      "nearest_confuser": "service-unavailable-blocker; the surface does not provide explicit outage or timeout evidence, so this is framed as a status-feedback risk rather than proven unavailability.",
+      "validation_path": "Review session recordings and failure analytics for abandonment after waits, provider handoffs, or unclear return-to-service states.",
+      "stop_or_repair_rule": "Drop if timing data shows no meaningful waits or handoff uncertainty and abandonment is explained by eligibility or proofing failure alone."
+    },
+    {
+      "id": "finding-007",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Trust and provenance were critical because users were asked to share identity information with certified companies while trying to access a government service.",
+      "issue_class": "trust-without-provenance",
+      "severity": "moderate",
+      "confidence": "low",
+      "evidence": "Users attempting to access government services were routed through GOV.UK Verify and had to prove identity with certified companies.",
+      "recommendation": "Explain why a certified company is involved, what certification means, what data is shared, who stores it, how long it is retained, and how the user can challenge or recover from a failed identity decision.",
+      "nearest_confuser": "domain-mismatch-trust-break; the issue is not mismatched evidence, but the need for provenance and rationale in a sensitive identity handoff.",
+      "validation_path": "Test comprehension and trust at the provider-selection step, especially whether users understand the government-provider relationship and data handling.",
+      "stop_or_repair_rule": "Downgrade if the supplied UI already contains clear certification, data-use, and accountability explanations that users understand in testing."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://preflight-ux.local/schemas/score.schema.json",
+  "title": "Preflight UX Score",
+  "type": "object",
+  "required": [
+    "score_type",
+    "run_id",
+    "surface",
+    "truth_classes",
+    "predicted_classes",
+    "hits",
+    "misses",
+    "false_positives",
+    "precision",
+    "recall",
+    "f1",
+    "severity_weighted_recall",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "score_type": {
+      "type": "string",
+      "enum": ["class-level-preliminary", "issue-level-reviewed"]
+    },
+    "run_type": {
+      "type": "string",
+      "enum": ["panel", "baseline"]
+    },
+    "baseline_kind": {
+      "type": ["string", "null"],
+      "enum": ["generic-critique", "heuristic-evaluation", null]
+    },
+    "run_id": { "type": "string" },
+    "surface": { "type": "string" },
+    "truth_classes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "predicted_classes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "hits": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "misses": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "false_positives": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "precision": { "type": ["number", "null"] },
+    "recall": { "type": ["number", "null"] },
+    "f1": { "type": ["number", "null"] },
+    "severity_weighted_recall": { "type": ["number", "null"] },
+    "notes": { "type": "string" }
+  }
+}

@@ -1,0 +1,42 @@
+issues:
+  - id: inaccurate-map-data
+    class: data-quality-trust-break
+    description: "Incorrect or misplaced map data caused users to distrust the core mapping output."
+    severity: severe
+    surfaced_by: "iOS 6 Maps users and press reports"
+    sources:
+      - title: "Apple Maps: Tim Cook says he is 'extremely sorry'"
+        url: "https://www.theguardian.com/technology/2012/sep/28/apple-maps-tim-cook-apology"
+        date: "2012-09-28"
+      - title: "Tim Cook Publishes Open Letter on Maps for iOS 6"
+        url: "https://www.macrumors.com/2012/09/28/tim-cook-publishes-open-letter-on-maps-for-ios-6/"
+        date: "2012-09-28"
+    notes: "Primary issue is data trust, not visual design."
+
+  - id: missing-transit-directions
+    class: data-quality-trust-break
+    description: "The new default Maps app lacked public transit directions users expected from the previous maps experience."
+    severity: moderate
+    surfaced_by: "iOS users and press reports"
+    sources:
+      - title: "Apple Maps: Tim Cook says he is 'extremely sorry'"
+        url: "https://www.theguardian.com/technology/2012/sep/28/apple-maps-tim-cook-apology"
+        date: "2012-09-28"
+      - title: "Tim Cook Apologizes for Mapocalypse Debacle"
+        url: "https://www.wired.com/2012/09/tim-cook-apologizes-for-maps/"
+        date: "2012-09-28"
+    notes: "Useful for testing whether personas notice removal of expected utility."
+
+  - id: alternative-app-recommendation
+    class: trust-without-provenance
+    description: "Apple's recommendation to use rival map apps signaled that the built-in product could not yet be trusted for its core job."
+    severity: moderate
+    surfaced_by: "Apple public apology and press coverage"
+    sources:
+      - title: "Tim Cook Publishes Open Letter on Maps for iOS 6"
+        url: "https://www.macrumors.com/2012/09/28/tim-cook-publishes-open-letter-on-maps-for-ios-6/"
+        date: "2012-09-28"
+      - title: "Tim Cook Apologizes for Mapocalypse Debacle"
+        url: "https://www.wired.com/2012/09/tim-cook-apologizes-for-maps/"
+        date: "2012-09-28"
+    notes: "Score as a trust/provenance signal only when a persona predicts confidence/trust failure."

@@ -1,0 +1,10 @@
+{
+  "name": "preflight-ux-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "check": "node --check api/panel.js",
+    "dev": "vercel dev"
+  }
+}

@@ -1,0 +1,8 @@
+slug: apple-maps-2012
+product_name: "Apple Maps"
+launch_date: "2012-09-19"
+surface_version: "iOS 6 launch"
+benchmark_status: draft
+source_quality: medium
+reviewer: "second-scorer-cold-review-2026-05-12"
+notes: "Strong public evidence of user-facing failure; benchmark is more about data-quality trust than interface layout."

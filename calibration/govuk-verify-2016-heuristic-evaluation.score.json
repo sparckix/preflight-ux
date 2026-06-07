@@ -1,0 +1,40 @@
+{
+  "baseline_kind": "heuristic-evaluation",
+  "f1": 0.4,
+  "false_positives": [
+    "account-before-value",
+    "agency-removed",
+    "information-architecture-overload",
+    "loading-abandonment",
+    "trust-without-provenance"
+  ],
+  "hits": [
+    "identity-verification-friction",
+    "vulnerable-user-access-barrier"
+  ],
+  "misses": [
+    "service-unavailable-blocker"
+  ],
+  "notes": "Preliminary class-level score. Human scorer review is required for issue-level calibration.",
+  "precision": 0.2857142857142857,
+  "predicted_classes": [
+    "account-before-value",
+    "agency-removed",
+    "identity-verification-friction",
+    "information-architecture-overload",
+    "loading-abandonment",
+    "trust-without-provenance",
+    "vulnerable-user-access-barrier"
+  ],
+  "recall": 0.6666666666666666,
+  "run_id": "govuk-verify-2016-heuristic-evaluation",
+  "run_type": "baseline",
+  "score_type": "class-level-preliminary",
+  "severity_weighted_recall": 0.6666666666666666,
+  "surface": "benchmark/products/govuk-verify-2016/surface.md",
+  "truth_classes": [
+    "identity-verification-friction",
+    "service-unavailable-blocker",
+    "vulnerable-user-access-barrier"
+  ]
+}

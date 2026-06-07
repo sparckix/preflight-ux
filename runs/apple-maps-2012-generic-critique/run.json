@@ -1,0 +1,102 @@
+{
+  "run_type": "baseline",
+  "run_id": "apple-maps-2012-generic-critique",
+  "surface": {
+    "type": "benchmark",
+    "ref": "benchmark/products/apple-maps-2012/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-generic-critique-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "generic-critique",
+    "prompt_ref": "runs/apple-maps-2012-generic-critique/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Hypothesis: replacing the previously trusted default with visibly missing, misplaced, or inaccurate map data could create an immediate trust break in the core utility.",
+      "issue_class": "data-quality-trust-break",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Surface says Apple Maps replaced the previously trusted Google Maps default and the launch version contained missing, misplaced, or inaccurate locations and landmarks.",
+      "recommendation": "Gate launch on location and landmark accuracy for high-traffic regions, keep fallback access to the prior provider where coverage is weak, and expose clear correction/reporting paths inside place results.",
+      "nearest_confuser": "trust-without-provenance, if the main issue is lack of confidence indicators rather than actual incorrect data.",
+      "validation_path": "Audit representative searches, landmarks, addresses, and POIs against trusted sources before launch; segment failures by geography and query type.",
+      "stop_or_repair_rule": "Drop or downgrade if measured error rates are low for launch markets and wrong results are clearly labeled or recoverable."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Hypothesis: inaccurate routing or location lookup in a default navigation app could cause high-cost real-world errors because the surface supports route planning and navigation.",
+      "issue_class": "data-quality-trust-break",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Surface says users opened Maps for search, location lookup, route planning, and navigation, and that map data included missing, misplaced, or inaccurate locations and landmarks.",
+      "recommendation": "Add launch readiness thresholds for routing accuracy, geocoding accuracy, and landmark placement; suppress or qualify routes when confidence is low; provide fast alternate-route and report-problem affordances.",
+      "nearest_confuser": "out-of-distribution-handling, if failures happen mainly in unsupported geographies or ambiguous queries.",
+      "validation_path": "Run end-to-end navigation tests across common route types, ambiguous destinations, landmarks, and rural/urban coverage before default replacement.",
+      "stop_or_repair_rule": "Revise if inaccuracies are limited to non-navigation metadata and do not affect search destination selection or route guidance."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Hypothesis: removing public transit directions compared with the prior default could make a familiar core workflow harder or impossible from the default app.",
+      "issue_class": "interaction-cost-regression",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Surface says users relied on transit information and public transit directions were absent compared with the prior default.",
+      "recommendation": "Preserve transit through an integrated provider handoff, keep the prior maps provider available for transit until parity exists, or clearly route transit searches to supported third-party options.",
+      "nearest_confuser": "data-quality-trust-break, if the shipped transit data exists but is incomplete or wrong rather than absent.",
+      "validation_path": "Test transit-oriented tasks from the prior default against the launch version: find station, compare routes, choose departure time, and start directions.",
+      "stop_or_repair_rule": "Drop if transit was not part of the supported launch promise in the target market and the UI clearly communicates that before users plan a trip."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Hypothesis: if search or routing returns confident results for missing or misplaced locations, users may not know when to distrust the answer.",
+      "issue_class": "trust-without-provenance",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "Surface says users relied on map search, landmarks, routing, and transit information, while launch data included missing, misplaced, or inaccurate locations and landmarks.",
+      "recommendation": "Show confidence cues for ambiguous or low-quality results, include source freshness where appropriate, and make corrections or alternate sources visible when result quality is uncertain.",
+      "nearest_confuser": "out-of-distribution-handling, if the issue is unsupported coverage rather than opaque confidence.",
+      "validation_path": "Review result screens for ambiguous searches, sparse regions, and disputed landmarks to confirm whether confidence, alternatives, or source quality are visible.",
+      "stop_or_repair_rule": "Downgrade if the launch UI already marks uncertain results, offers plausible alternatives, and prevents low-confidence destinations from being treated as definitive."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Hypothesis: recommending third-party or web-map alternatives after launch may not sufficiently repair blocked default-app workflows unless the handoff is immediate and task-specific.",
+      "issue_class": "agency-removed",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "Surface says Apple recommended third-party or web-map alternatives while improving Maps.",
+      "recommendation": "Place contextual fallback actions directly inside failed or unsupported flows, such as 'Open transit directions in another app' or 'Search this place on web maps,' rather than relying only on general guidance.",
+      "nearest_confuser": "support-channel-failure, if the main risk is users needing help rather than lacking an in-product recovery path.",
+      "validation_path": "Test whether a user can recover from missing transit, inaccurate POI, or failed search without leaving the task context or manually re-entering the destination.",
+      "stop_or_repair_rule": "Drop if alternatives are deeply linked, preserve destination context, and appear exactly where the default app cannot complete the task."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-generic-critique",
+      "raw_finding": "Hypothesis: a full default-app replacement without clear coverage boundaries could overextend trust into geographies or transit modes where the data is not launch-ready.",
+      "issue_class": "out-of-distribution-handling",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "Surface frames the benchmark as a trust/data-quality case for a default utility app with real-world consequences, and reports missing, misplaced, or inaccurate locations plus absent transit directions.",
+      "recommendation": "Define and expose launch coverage boundaries by region and mode, degrade gracefully for unsupported areas, and avoid presenting unsupported transit or low-quality map regions as equivalent to supported ones.",
+      "nearest_confuser": "data-quality-trust-break, if coverage is intended to be complete but the data is simply wrong.",
+      "validation_path": "Map failure rates by geography, transportation mode, and query category; inspect whether unsupported cases are visibly differentiated from supported ones.",
+      "stop_or_repair_rule": "Revise if the launch is explicitly scoped to known-supported markets and unsupported cases are blocked or labeled before users rely on them."
+    }
+  ]
+}

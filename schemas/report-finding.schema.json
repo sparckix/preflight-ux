@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://preflight-ux.local/schemas/report-finding.schema.json",
+  "title": "Preflight UX Report Finding",
+  "type": "object",
+  "required": [
+    "id",
+    "issue_class",
+    "predicted_behavior",
+    "evidence",
+    "severity",
+    "confidence",
+    "recommendation",
+    "validation_needed"
+  ],
+  "anyOf": [
+    { "required": ["persona"] },
+    { "required": ["source"] }
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "issue_class": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "persona": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "source": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "predicted_behavior": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["minor", "moderate", "severe"]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "recommendation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "validation_needed": {
+      "type": "boolean"
+    },
+    "calibration": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

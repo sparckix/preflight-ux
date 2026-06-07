@@ -1,0 +1,36 @@
+{
+  "baseline_kind": "generic-critique",
+  "f1": 0.6666666666666666,
+  "false_positives": [
+    "form-submission-blocker",
+    "identity-verification-friction",
+    "vulnerable-user-access-barrier"
+  ],
+  "hits": [
+    "account-before-value",
+    "loading-abandonment",
+    "service-unavailable-blocker"
+  ],
+  "misses": [],
+  "notes": "Preliminary class-level score. Human scorer review is required for issue-level calibration.",
+  "precision": 0.5,
+  "predicted_classes": [
+    "account-before-value",
+    "form-submission-blocker",
+    "identity-verification-friction",
+    "loading-abandonment",
+    "service-unavailable-blocker",
+    "vulnerable-user-access-barrier"
+  ],
+  "recall": 1.0,
+  "run_id": "healthcare-gov-2013-generic-critique",
+  "run_type": "baseline",
+  "score_type": "class-level-preliminary",
+  "severity_weighted_recall": 1.0,
+  "surface": "benchmark/products/healthcare-gov-2013/surface.md",
+  "truth_classes": [
+    "account-before-value",
+    "loading-abandonment",
+    "service-unavailable-blocker"
+  ]
+}

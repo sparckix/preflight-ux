@@ -1,0 +1,115 @@
+{
+  "run_type": "baseline",
+  "run_id": "healthcare-gov-2013-heuristic-evaluation",
+  "surface": {
+    "type": "spec",
+    "ref": "benchmark/products/healthcare-gov-2013/surface.md",
+    "hash": ""
+  },
+  "model": {
+    "provider": "codex",
+    "name": "default",
+    "version": "",
+    "temperature": 0
+  },
+  "prompt_version": "baseline-heuristic-evaluation-v0.2",
+  "date": "2026-06-06",
+  "personas": [],
+  "baseline": {
+    "kind": "heuristic-evaluation",
+    "prompt_ref": "runs/healthcare-gov-2013-heuristic-evaluation/baseline-prompt.md"
+  },
+  "findings": [
+    {
+      "id": "finding-001",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Requiring account creation before browsing plans likely suppressed first-use evaluation and forced users into a high-friction commitment before they could understand available value.",
+      "issue_class": "account-before-value",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface states that users had to register before browsing plans in many cases, account creation was one of the first steps, and the browsing-without-registering path was added or improved after launch.",
+      "recommendation": "Make anonymous plan browsing the default path. Ask for account creation only when users save, enroll, compare personalized eligibility, or perform actions that legally require identity.",
+      "nearest_confuser": "identity-verification-friction, if the main failure was the verification dependency rather than the premature placement of registration.",
+      "validation_path": "Compare funnel completion, plan-browse starts, registration starts, and abandonment between register-first and browse-first variants.",
+      "stop_or_repair_rule": "Drop or downgrade if registration before browsing was legally required and the interface clearly explained why before collecting data."
+    },
+    {
+      "id": "finding-002",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The core launch path appears to have failed as a blocking digital service, preventing users from completing prerequisite account actions during a deadline-driven enrollment flow.",
+      "issue_class": "service-unavailable-blocker",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "Users encountered long waits, blank screens, error messages, and invalid account states while account creation depended on multiple backend systems.",
+      "recommendation": "Add launch-readiness gates for account creation, dependency health checks, graceful degradation, queueing, retry-safe submissions, and a browse-only fallback when account systems are degraded.",
+      "nearest_confuser": "form-submission-blocker, if the failures were primarily validation or form dependency errors rather than broader service availability.",
+      "validation_path": "Review launch telemetry for error rates, timeout rates, blank-screen incidence, account-state exceptions, and successful account creation by backend dependency.",
+      "stop_or_repair_rule": "Revise if logs show the service remained available and the reported failures were isolated client-side rendering defects."
+    },
+    {
+      "id": "finding-003",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Long waits and blank screens likely violated visibility of system status, increasing abandonment and duplicate attempts during the first-use flow.",
+      "issue_class": "loading-abandonment",
+      "severity": "severe",
+      "confidence": "high",
+      "evidence": "The surface reports long waits and blank screens during account creation and before users could inspect plan options.",
+      "recommendation": "Replace blank waits with explicit progress states, expected timing, dependency status, safe retry guidance, and non-blocking continuation to browse general plans where possible.",
+      "nearest_confuser": "service-unavailable-blocker, if the waits were caused by full outage rather than poor feedback during slow operations.",
+      "validation_path": "Measure time spent on loading and blank states, abandonment after four seconds, repeat submissions, refresh behavior, and support contacts after stalled states.",
+      "stop_or_repair_rule": "Downgrade if observed waits were rare, under one second, or accompanied by clear progress and recovery guidance."
+    },
+    {
+      "id": "finding-004",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Identity and security dependencies appear to have created invalid account states, likely trapping users without a clear way to recover or restart safely.",
+      "issue_class": "identity-verification-friction",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "Account creation required multiple backend systems and identity/security steps, and users encountered invalid account states before they could inspect options.",
+      "recommendation": "Design identity proofing as a resumable state machine with clear status, fixable errors, alternate verification paths, and escalation for users blocked by dependency failures.",
+      "nearest_confuser": "service-unavailable-blocker, because the supplied surface does not specify whether invalid states came from identity verification itself or general backend failures.",
+      "validation_path": "Audit account-state transitions, identity failure codes, support tickets mentioning locked or invalid accounts, and recovery success rates.",
+      "stop_or_repair_rule": "Revise to service-unavailable-blocker if invalid states were caused by non-identity account provisioning failures."
+    },
+    {
+      "id": "finding-005",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The launch flow likely failed basic recovery expectations by leaving users with error messages and invalid account states in a high-stakes deadline context.",
+      "issue_class": "form-submission-blocker",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "Users encountered error messages and invalid account states while attempting early account creation in a public-service enrollment flow.",
+      "recommendation": "Make every blocking error actionable: preserve entered data, explain what happened, distinguish retryable from non-retryable errors, offer a safe retry, and provide an alternate completion channel before deadlines.",
+      "nearest_confuser": "service-unavailable-blocker, if the same failure is better understood as system outage rather than form or submission recovery.",
+      "validation_path": "Review error-message copy, submission retry behavior, data preservation, account recovery paths, and completion rates after each error type.",
+      "stop_or_repair_rule": "Drop if all error states already provided specific remediation and users could successfully recover without losing progress."
+    },
+    {
+      "id": "finding-006",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "The interface likely made users commit private effort before seeing plan availability, weakening recognition over recall and trust in whether the marketplace was relevant to them.",
+      "issue_class": "empty-state-confusion",
+      "severity": "moderate",
+      "confidence": "medium",
+      "evidence": "Users often had to create an account before browsing available insurance plans, and the first usable value state was delayed until after registration.",
+      "recommendation": "Show concrete plan examples, coverage ranges, eligibility cues, and required next steps before registration, with clear labeling for estimates versus personalized results.",
+      "nearest_confuser": "account-before-value, which is the stronger class if the main issue is gating value behind registration rather than lack of explanatory preview.",
+      "validation_path": "Test whether first-time users can predict what information they will get, whether plans are available, and why registration is needed before they create an account.",
+      "stop_or_repair_rule": "Downgrade or merge into account-before-value if the surface already gave concrete examples and the only defect was the registration gate."
+    },
+    {
+      "id": "finding-007",
+      "source": "baseline-heuristic-evaluation",
+      "raw_finding": "Because this was a high-stakes public-service enrollment deadline, launch failures likely created an inclusion risk for users with fewer fallback options or higher support needs.",
+      "issue_class": "vulnerable-user-access-barrier",
+      "severity": "severe",
+      "confidence": "medium",
+      "evidence": "The product served a high-stakes public-service enrollment deadline, while users encountered registration gates, long waits, blank screens, errors, and invalid account states.",
+      "recommendation": "Provide low-bandwidth and no-account browsing, deadline-safe extensions or proof-of-attempt handling, assisted enrollment paths, and clear non-digital fallback options when the online flow is degraded.",
+      "nearest_confuser": "support-channel-failure, but the supplied surface does not provide evidence about support availability or call-center performance.",
+      "validation_path": "Segment failure and completion data by device, bandwidth, language, disability accommodations, assisted enrollment use, and deadline proximity.",
+      "stop_or_repair_rule": "Downgrade if evidence shows failures were brief, evenly distributed, and backed by reliable alternative enrollment channels."
+    }
+  ]
+}
