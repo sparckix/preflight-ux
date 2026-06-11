@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "preflight-ux",
+  "version": "0.2.0",
+  "description": "Preflight UX skills for catching UX risks before launch: structured AI review, benchmark calibration, and repo-ready reports.",
+  "owner": {
+    "name": "Daniel Alami",
+    "url": "https://github.com/sparckix/preflight-ux"
+  },
+  "plugins": [
+    {
+      "name": "preflight-ux-review",
+      "description": "Run structured UX risk reviews, calibrate findings against benchmark failures, and produce action-oriented reports.",
+      "source": "./preflight-ux-review",
+      "category": "product-design"
+    }
+  ]
+}

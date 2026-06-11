@@ -68,6 +68,37 @@ python3 tools/validate_repo.py
 python3 -m uxpanel validate
 ```
 
+## Install As Agent Skills
+
+Preflight UX also ships as a small skill plugin for Claude Code/Cowork and
+Codex-style skill workflows.
+
+Claude Code:
+
+```bash
+claude plugin marketplace add sparckix/preflight-ux
+claude plugin install preflight-ux-review@preflight-ux
+```
+
+Codex:
+
+```bash
+codex plugin marketplace add sparckix/preflight-ux
+codex plugin add preflight-ux-review@preflight-ux
+```
+
+Installed skills:
+
+- `catch-ux-risks` — review a product surface for launch risks
+- `calibrate-ux-findings` — compare findings against known failures
+- `write-ux-risk-report` — turn findings into a product-ready report
+
+The skill plugin is a distribution layer. The benchmark, CLI, schemas, and
+scoring artifacts in this repo remain the source of truth.
+The plugin includes a small helper script that locates this checkout from the
+current workspace or `PREFLIGHT_UX_REPO` and delegates to `python -m uxpanel`
+when repo-backed validation, scoring, or report generation is available.
+
 Create a benchmark entry:
 
 ```bash

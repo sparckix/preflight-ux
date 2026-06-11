@@ -1,0 +1,19 @@
+{
+  "name": "preflight-ux-review",
+  "version": "0.2.0",
+  "description": "Skills for structured pre-launch UX risk review, benchmark calibration, and product-ready reporting.",
+  "author": {
+    "name": "Daniel Alami",
+    "url": "https://github.com/sparckix/preflight-ux"
+  },
+  "keywords": [
+    "ux",
+    "product",
+    "review",
+    "risk",
+    "benchmark",
+    "calibration"
+  ],
+  "homepage": "https://github.com/sparckix/preflight-ux",
+  "license": "MIT"
+}
